@@ -22,6 +22,10 @@ public class User {
         this.bank = bank;
     }
 
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
+
     public long getId() {
         return id;
     }

@@ -31,10 +31,15 @@ public abstract class Bank {
     abstract int getLimitOfWithdrawal();
     abstract int getLimitOfFunding();
     public abstract double getMonthlyRate();
+
     public abstract double getCommission(int amount);
 
     public double moneyPaidMonthlyForSalary(){
         return numberOfEmployees * avrSalaryOfEmployee;
+    }
+
+    public void setBankCountry(String bankCountry) {
+        this.bankCountry = bankCountry;
     }
 
     public long getId() {

@@ -28,7 +28,12 @@ public class UkrainianBankSystem implements BankSystem {
 
     @Override
     public void fund(User user, int amount) {
-        user.setBalance(user.getBalance() + amount - amount * user.getBank().getCommission(amount));
+        if(user.getBalance() + amount > Integer.MAX_VALUE){
+            System.err.println("Can't fund money " + amount + "from user " + user.toString());
+            return;
+        }
+
+        user.setBalance(user.getBalance() + amount);
     }
 
     @Override
