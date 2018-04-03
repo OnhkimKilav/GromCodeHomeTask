@@ -13,5 +13,8 @@ public class Main {
 
         System.out.println(user.getBalance());
 
+        bankSystem.fund(user, 2000);
+        System.out.println(user.getBalance());
+
     }
 }
