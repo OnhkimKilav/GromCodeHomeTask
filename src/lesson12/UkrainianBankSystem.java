@@ -9,18 +9,6 @@ public class UkrainianBankSystem implements BankSystem {
         //проверить можно ли снять - проверить лимит, проверить достаточно ли денег
         //снять деньги
 
-        /*int limitOfWithdrawal = user.getBank().getLimitOfWithdrawal();
-
-        if (amount + user.getBank().getCommission(amount) < limitOfWithdrawal) {
-            printWithdrawalErrorMsg(amount, user);
-            return;
-        }
-
-        if (amount + user.getBank().getCommission(amount) < user.getBalance()) {
-            printWithdrawalErrorMsg(amount, user);
-            return;
-        }*/
-
         if (!checkWithdraw(user, amount))
             return;
         user.setBalance(user.getBalance() - amount - amount * user.getBank().getCommission(amount));
@@ -29,15 +17,11 @@ public class UkrainianBankSystem implements BankSystem {
     @Override
     public void fund(User user, int amount) {
 
-        if (amount < user.getBank().getLimitOfFunding()) {
+        if (amount > user.getBank().getLimitOfFunding()) {
             System.err.println("Can't fund money " + amount + "from user " + user.toString());
             return;
         }
-
-        if (user.getBalance() + amount > Integer.MAX_VALUE) {
-            System.err.println("Can't fund money " + amount + "from user " + user.toString());
-            return;
-        }
+        user.setBalance(user.getBalance() + amount);
     }
 
     @Override
@@ -46,10 +30,10 @@ public class UkrainianBankSystem implements BankSystem {
         //пополняем toUser
 
         withdraw(fromUser, amount);
-
         fromUser.setBalance(fromUser.getBalance() - amount - amount * fromUser.getBank().getCommission(amount));
 
-        toUser.setBalance(toUser.getBalance() + amount - amount * toUser.getBank().getCommission(amount));
+        fund(toUser, amount);
+        toUser.setBalance(toUser.getBalance() + amount);
     }
 
     @Override
