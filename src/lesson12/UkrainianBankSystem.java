@@ -36,9 +36,8 @@ public class UkrainianBankSystem implements BankSystem {
             System.err.println("Can't fund money " + amount + "from user " + toUser.toString());
             return;
         }
-        fromUser.setBalance(fromUser.getBalance() - amount - amount * fromUser.getBank().getCommission(amount));
+        fromUser.setBalance(fromUser.getBalance() - amount);
         toUser.setBalance(toUser.getBalance() + amount);
-
     }
 
     @Override
