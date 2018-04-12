@@ -44,11 +44,11 @@ public class UkrainianBankSystem implements BankSystem {
 
     @Override
     public void paySalary(User user) {
-        if (user.getBank().getMonthlyRate() > user.getBank().getLimitOfFunding()) {
-            System.err.println("Can't fund money " + user.getBank().getMonthlyRate() + "from user " + user.toString());
+        if (user.getBank().getAvrSalaryOfEmployee() > user.getBank().getLimitOfFunding()) {
+            System.err.println("Can't fund money " + user.getBank().getAvrSalaryOfEmployee() + "from user " + user.toString());
             return;
         }
-        user.setBalance(user.getBalance() + user.getBank().getMonthlyRate());
+        user.setBalance(user.getBalance() + user.getBank().getAvrSalaryOfEmployee());
     }
 
     private boolean checkWithdraw(User user, int amount) {
