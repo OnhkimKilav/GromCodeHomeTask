@@ -36,17 +36,19 @@ public class UkrainianBankSystem implements BankSystem {
             System.err.println("Can't fund money " + amount + "from user " + toUser.toString());
             return;
         }
+        if (toUser.getBank().getCurrency() == Currency.EUR && fromUser.getBank().getCurrency() != Currency.EUR || toUser.getBank().getCurrency() == Currency.USD && fromUser.getBank().getCurrency() != Currency.USD)
+            return;
         fromUser.setBalance(fromUser.getBalance() - amount - amount * fromUser.getBank().getCommission(amount));
         toUser.setBalance(toUser.getBalance() + amount);
     }
 
     @Override
     public void paySalary(User user) {
-        if(user.getBank().getMonthlyRate() < user.getBank().getAvrSalaryOfEmployee()){
-            System.out.println("Can't pay salary "+user.getBank().getMonthlyRate()+"from user "+user.toString());
+        if(user.getBank().getAvrSalaryOfEmployee() < user.getBank().getMonthlyRate()){
+            System.out.println("Can't pay salary "+user.getBank().getAvrSalaryOfEmployee()+"from user "+user.toString());
             return;
         }
-        user.setBalance(user.getBalance() + user.getBank().getMonthlyRate());
+        user.setBalance(user.getBalance() + user.getBank().getAvrSalaryOfEmployee());
     }
 
     private boolean checkWithdraw(User user, int amount) {
