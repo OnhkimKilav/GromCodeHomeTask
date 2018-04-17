@@ -1,14 +1,10 @@
-package lesson9.HomeTask;
+package lesson13;
 
 /**
  * Created by Valik on 25.02.2018.
  */
 public class UserRepository {
-    private User[] users;
-
-    public UserRepository(User[] users) {
-        this.users = users;
-    }
+    private User[] users = new User[10];
 
     public User[] getUsers() {
         return users;
