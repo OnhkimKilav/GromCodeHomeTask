@@ -12,7 +12,7 @@ public class Controller {
     private int index = 0;
 
 
-    public Controller(API[] apis) {
+    public Controller(API[] apis1, API[] apis) {
         this.apis = apis;
     }
 
@@ -54,14 +54,4 @@ public class Controller {
         }
         return newRooms;
     }
-
-   /* private Room[] saveAllRooms(Room room, API api){
-        Room[] rooms = new Room[0];
-        int index = 0;
-        for(Room room1 : api.findRooms(room.getPrice(), room.getPersons(), room.getCityName(), room.getHotelName())){
-            rooms[index] = room1;
-            index++;
-        }
-        return rooms;
-    }*/
 }
