@@ -25,8 +25,8 @@ public class GoogleAPI implements API {
         for(Room room : rooms){
             if(room.equals(rooms[index])){
                 newRooms[index] = room;
+                index++;
             }
-            index++;
         }
         return newRooms;
     }
