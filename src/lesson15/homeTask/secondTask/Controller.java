@@ -11,6 +11,14 @@ public class Controller {
     private TripAdvisorAPI tripAdvisorAPI = new TripAdvisorAPI(rooms);
     private int index = 0;
 
+    public Controller(API[] apis, Room[] rooms, BookingComAPI bookingComAPI, GoogleAPI googleAPI, TripAdvisorAPI tripAdvisorAPI, int index) {
+        this.apis = apis;
+        this.rooms = rooms;
+        this.bookingComAPI = bookingComAPI;
+        this.googleAPI = googleAPI;
+        this.tripAdvisorAPI = tripAdvisorAPI;
+        this.index = index;
+    }
 
     public Controller(API[] apis1, API[] apis) {
         this.apis = apis;
