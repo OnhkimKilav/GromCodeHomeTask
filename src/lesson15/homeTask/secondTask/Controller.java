@@ -1,7 +1,5 @@
 package lesson15.homeTask.secondTask;
 
-import java.util.Arrays;
-
 /**
  * Created by Valik on 19.03.2018.
  */
@@ -57,31 +55,4 @@ public class Controller {
         return newRooms;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Controller that = (Controller) o;
-
-        if (index != that.index) return false;
-        // Probably incorrect - comparing Object[] arrays with Arrays.equals
-        if (!Arrays.equals(apis, that.apis)) return false;
-        // Probably incorrect - comparing Object[] arrays with Arrays.equals
-        if (!Arrays.equals(rooms, that.rooms)) return false;
-        if (!bookingComAPI.equals(that.bookingComAPI)) return false;
-        if (!googleAPI.equals(that.googleAPI)) return false;
-        return tripAdvisorAPI.equals(that.tripAdvisorAPI);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Arrays.hashCode(apis);
-        result = 31 * result + Arrays.hashCode(rooms);
-        result = 31 * result + bookingComAPI.hashCode();
-        result = 31 * result + googleAPI.hashCode();
-        result = 31 * result + tripAdvisorAPI.hashCode();
-        result = 31 * result + index;
-        return result;
-    }
 }
