@@ -16,17 +16,19 @@ public class GoogleAPI implements API {
         int count = 0;
         int index = 0;
         for (Room room : rooms) {
-            if (room.equals(rooms[index])) {
+            Room room1 = new Room(room.getId(), price, persons, room.getDateAvailableFrom(), hotel, city);
+            if (room.equals(room1)) {
                 count++;
             }
             index++;
         }
         Room[] newRooms = new Room[count];
         for(Room room : rooms){
-            if(room.equals(rooms[index])){
+            Room room1 = new Room(room.getId(), price, persons, room.getDateAvailableFrom(), hotel, city);
+            if (room.equals(room1)){
                 newRooms[index] = room;
-                index++;
             }
+            index++;
         }
         return newRooms;
     }
