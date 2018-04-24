@@ -62,12 +62,11 @@ public class Room {
 
         Room room = (Room) o;
 
-        if (id != room.id) return false;
         if (price != room.price) return false;
         if (persons != room.persons) return false;
-        if (!dateAvailableFrom.equals(room.dateAvailableFrom)) return false;
-        if (!hotelName.equals(room.hotelName)) return false;
-        return cityName.equals(room.cityName);
+        if (hotelName != null ? !hotelName.equals(room.hotelName) : room.hotelName != null) return false;
+        return cityName != null ? cityName.equals(room.cityName) : room.cityName == null;
+
     }
 
     @Override
