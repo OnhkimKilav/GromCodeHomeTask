@@ -37,7 +37,7 @@ public class Controller {
         int count = 0;
         for(Room room : api1.getAll()){
             for(Room room1 : api2.getAll()){
-                if(room.getHotelName() == room1.getHotelName() && room.getPrice() == room1.getPrice() && room.getPersons() == room1.getPersons() && room.getCityName() ==room1.getCityName() && !room.equals(room1)){
+                if(room.equals(room1)){
                     count++;
                 }
             }
@@ -46,7 +46,7 @@ public class Controller {
         index = 0;
         for(Room room : api1.getAll()){
             for(Room room1 : api2.getAll()){
-                if(room.getHotelName() == room1.getHotelName() && room.getPrice() == room1.getPrice() && room.getPersons() == room1.getPersons() && room.getCityName() ==room1.getCityName() && !room.equals(room1)){
+                if(room.equals(room1)){
                     newRooms[index] = room;
                     index++;
                 }
