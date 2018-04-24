@@ -14,14 +14,13 @@ public class GoogleAPI implements API {
     @Override
     public Room[] findRooms(int price, int persons, String city, String hotel) {
         int count = 0;
-        int index = 0;
         for (Room room : rooms) {
             Room room1 = new Room(room.getId(), price, persons, room.getDateAvailableFrom(), hotel, city);
             if (room.getPrice() == price && room.getPersons() == persons && room.getCityName() == city && room.getHotelName() == hotel && !room.equals(room1)) {
                 count++;
             }
-            index++;
         }
+        int index = 0;
         Room[] newRooms = new Room[count];
         for(Room room : rooms){
             Room room1 = new Room(room.getId(), price, persons, room.getDateAvailableFrom(), hotel, city);
