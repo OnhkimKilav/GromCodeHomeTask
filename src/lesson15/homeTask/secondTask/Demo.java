@@ -49,11 +49,11 @@ public class Demo {
         BookingComAPI bookingComAPI2 = new BookingComAPI(roomsController2);
         BookingComAPI[] bookingComAPIS = new BookingComAPI[]{bookingComAPI1, bookingComAPI2};
 
-        Controller controller = new Controller(bookingComAPIS, bookingComAPIS);
+        /*Controller controller = new Controller(bookingComAPIS, bookingComAPIS);
 
         for(Room roomController6 : controller.check(bookingComAPI1,bookingComAPI2)){
             System.out.println(roomController6.getId());
-        }
+        }*/
 
         System.out.println();
         Room roomController6 = new Room(7945, 100, 1, new Date(), "Vicktoria", "Donetsk");
@@ -69,11 +69,11 @@ public class Demo {
         BookingComAPI bookingComAPI4 = new BookingComAPI(roomsController4);
         BookingComAPI[] bookingComAPIS2 = new BookingComAPI[]{bookingComAPI3, bookingComAPI4};
 
-        Controller controller1 = new Controller(bookingComAPIS2, bookingComAPIS2);
+        //Controller controller1 = new Controller(bookingComAPIS2, bookingComAPIS2);
 
-        for(Room roomController12 : controller1.check(bookingComAPI3,bookingComAPI4)){
+        /*for(Room roomController12 : controller1.check(bookingComAPI3,bookingComAPI4)){
             System.out.println(roomController12.getId());
-        }
+        }*/
 
 
         System.out.println("GoogleAPI");
