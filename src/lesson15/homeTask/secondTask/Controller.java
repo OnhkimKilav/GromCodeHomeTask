@@ -12,10 +12,7 @@ public class Controller {
     private int index = 0;
 
 
-    public Controller(TripAdvisorAPI tripAdvisorAPI, GoogleAPI googleAPI, BookingComAPI bookingComAPI, API[] apis) {
-        this.tripAdvisorAPI = tripAdvisorAPI;
-        this.googleAPI = googleAPI;
-        this.bookingComAPI = bookingComAPI;
+    public Controller(API[] apis) {
         this.apis = apis;
     }
 
