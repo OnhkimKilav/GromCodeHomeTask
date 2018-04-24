@@ -26,8 +26,8 @@ public class GoogleAPI implements API {
             Room room1 = new Room(room.getId(), price, persons, room.getDateAvailableFrom(), hotel, city);
             if (room.getPrice() == price && room.getPersons() == persons && room.getCityName() == city && room.getHotelName() == hotel && !room.equals(room1)){
                 newRooms[index] = room;
+                index++;
             }
-            index++;
         }
         return newRooms;
     }
