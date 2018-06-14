@@ -8,24 +8,18 @@ public class Controller {
 
         testExceptionOnNullStorageAndFile(storage, file);
 
-        testExceptionStorageOnFormats(storage, file);
-
-        testExceptionFileOnIdWithStorage(storage, file);
-
-        testExceptionStorageOnTheSize(storage);
-
         int index = 0;
-        File[] newFile = new File[storage.getFiles().length];
 
         for (File file1 : storage.getFiles()) {
             if (file1 == null) {
-                newFile[index] = file;
+                testExceptionStorageOnFormats(storage, file);
+                testExceptionStorageOnTheSize(storage);
+                testExceptionFileOnIdWithStorage(storage, file);
+                storage.getFiles()[index] = file;
                 break;
             }
-            newFile[index] = file1;
             index++;
         }
-        storage.setFiles(newFile);
     }
 
     public void delete(Storage storage, File file) {
