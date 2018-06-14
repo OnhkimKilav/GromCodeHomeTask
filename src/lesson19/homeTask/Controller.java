@@ -69,12 +69,12 @@ public class Controller {
 
     private void testExceptionOnNullStorageAndFile(Storage storage, File file) {
         if (storage == null || file == null)
-            return;
+            throw new NullPointerException("Storage or file is null");
     }
 
     private void testExceptionOnNullStorageAndStorage(Storage storage, Storage storage1) {
         if (storage == null || storage1 == null)
-            return;
+            throw new NullPointerException("Storage or file is null");
     }
 
     //проверка на формат
