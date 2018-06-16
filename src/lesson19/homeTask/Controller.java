@@ -11,10 +11,7 @@ public class Controller {
         int index = 0;
 
         for (File file1 : storage.getFiles()) {
-            if (file1 == null) {
-                testExceptionStorageOnFormats(storage, file);
-                testExceptionStorageOnTheSize(storage);
-                testExceptionFileOnIdWithStorage(storage, file);
+            if (file1 == null && testExceptionStorageOnFormats(storage, file) && testExceptionStorageOnTheSize(storage) && testExceptionFileOnIdWithStorage(storage, file)) {
                 storage.getFiles()[index] = file;
                 break;
             }
@@ -38,33 +35,45 @@ public class Controller {
     public void transferAll(Storage storageFrom, Storage storageTo) {
         testExceptionOnNullStorageAndStorage(storageFrom, storageTo);
 
-        storageTo.setFiles(storageFrom.getFiles());
+        int index = quantityFilesInStorage(storageTo);
+
+        for (File file1 : storageFrom.getFiles()) {
+            if (file1 == null)
+                break;
+            for (File file : storageTo.getFiles()) {
+                if (testExceptionStorageOnFormats(storageTo, file1) && testExceptionFileOnIdWithStorage(storageTo, file1) && testExceptionStorageOnTheSize(storageTo)) {
+                    storageTo.getFiles()[index] = file1;
+                    break;
+                }
+            }
+            index++;
+        }
     }
 
     public void transferFile(Storage storageFrom, Storage storageTo, long id) {
         testExceptionOnNullStorageAndStorage(storageFrom, storageTo);
 
+        int index = quantityFilesInStorage(storageTo);
+
+        for (File file1 : storageFrom.getFiles()) {
+            if (file1 == null)
+                break;
+            for (File file : storageTo.getFiles()) {
+                if (file1.getId() == id && testExceptionStorageOnFormats(storageTo, file1) && testExceptionFileOnIdWithStorage(storageTo, file1) && testExceptionStorageOnTheSize(storageTo)) {
+                    storageTo.getFiles()[index] = file1;
+                    break;
+                }
+            }
+        }
+    }
+
+    private int quantityFilesInStorage(Storage storageTo) {
         int index = 0;
-
-        for (File file : storageFrom.getFiles()) {
-            if (file.getId() == id) {
-                testExceptionStorageOnTheSize(storageTo);
-                storageTo.getFiles()[index] = file;
+        for (File file : storageTo.getFiles()) {
+            if (file != null)
                 index++;
-            }
         }
-/*
-        File[] newFile = new File[index];
-
-        index = 0;
-        for (File file : storageFrom.getFiles()) {
-            if (file.getId() == id) {
-                newFile[index] = file;
-                index++;
-            }
-        }
-        storageTo.setFiles(newFile);*/
-
+        return index;
     }
 
     private void testExceptionOnNullStorageAndFile(Storage storage, File file) {
@@ -89,6 +98,8 @@ public class Controller {
         //нужно сравнить формат файла с форматом всех возможных форматов storage
         boolean step = false;
         for (int i = 0; i < storage.getFormatsSupported().length; i++) {
+            if (file.getFormat() == null)
+                throw new NullPointerException("Format in the file " + file.getId() + " equal null");
             if (file.getFormat().equals(storage.getFormatsSupported()[i])) {
                 step = true;
             }
