@@ -4,23 +4,28 @@ package lesson19.homeTask;
  * Created by Valik on 04.06.2018.
  */
 public class Controller {
-    public void put(Storage storage, File file) {
+    public File put(Storage storage, File file) {
+        if(testExceptionStorageOnFormats(storage, file) && testExceptionStorageOnTheSize(storage) && testExceptionFileOnIdWithStorage(storage, file)){}
 
-        testExceptionOnNullStorageAndFile(storage, file);
+        testExceptionOnNull(storage, file);
 
         int index = 0;
-
         for (File file1 : storage.getFiles()) {
-            if (file1 == null && testExceptionStorageOnFormats(storage, file) && testExceptionStorageOnTheSize(storage) && testExceptionFileOnIdWithStorage(storage, file)) {
-                storage.getFiles()[index] = file;
-                break;
+            if(file1 == null) {
+                try {
+                    storage.getFiles()[index] = file;
+                }catch (RuntimeException e) {
+                    System.out.println("file don't recorded");
+                }
+                    break;
             }
             index++;
         }
+        return file;
     }
 
     public void delete(Storage storage, File file) {
-        testExceptionOnNullStorageAndFile(storage, file);
+        testExceptionOnNull(storage, file);
 
         int index = 0;
         for (File file1 : storage.getFiles()) {
@@ -33,7 +38,7 @@ public class Controller {
     }
 
     public void transferAll(Storage storageFrom, Storage storageTo) {
-        testExceptionOnNullStorageAndStorage(storageFrom, storageTo);
+        testExceptionOnNull(storageFrom, storageTo);
 
         int index = quantityFilesInStorage(storageTo);
 
@@ -51,7 +56,7 @@ public class Controller {
     }
 
     public void transferFile(Storage storageFrom, Storage storageTo, long id) {
-        testExceptionOnNullStorageAndStorage(storageFrom, storageTo);
+        testExceptionOnNull(storageFrom, storageTo);
 
         int index = quantityFilesInStorage(storageTo);
 
@@ -76,12 +81,12 @@ public class Controller {
         return index;
     }
 
-    private void testExceptionOnNullStorageAndFile(Storage storage, File file) {
+    private void testExceptionOnNull(Storage storage, File file) {
         if (storage == null || file == null)
             throw new NullPointerException("Storage or file is null");
     }
 
-    private void testExceptionOnNullStorageAndStorage(Storage storage, Storage storage1) {
+    private void testExceptionOnNull(Storage storage, Storage storage1) {
         if (storage == null || storage1 == null)
             throw new NullPointerException("Storage or file is null");
     }
