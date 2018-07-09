@@ -7,7 +7,11 @@ import java.util.NoSuchElementException;
  */
 public class Controller {
     public File put(Storage storage, File file) throws RuntimeException {
-        if (testExceptionFormats(storage, file) && testExceptionSize(storage) && testExceptionId(storage, file)) {
+        try {
+            if (testExceptionFormats(storage, file) && testExceptionSize(storage) && testExceptionId(storage, file)) {
+            }
+        }catch (RuntimeException e) {
+            System.err.println("Error: " + e.getMessage());
         }
 
         int index = 0;
