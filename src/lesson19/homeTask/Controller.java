@@ -1,23 +1,20 @@
 package lesson19.homeTask;
 
+import java.util.NoSuchElementException;
+
 /**
  * Created by Valik on 04.06.2018.
  */
 public class Controller {
-    public File put(Storage storage, File file) {
-        if(testExceptionStorageOnFormats(storage, file) && testExceptionStorageOnTheSize(storage) && testExceptionFileOnIdWithStorage(storage, file)){}
-
-        testExceptionOnNull(storage, file);
+    public File put(Storage storage, File file) throws RuntimeException {
+        if (testExceptionFormats(storage, file) && testExceptionSize(storage) && testExceptionId(storage, file)) {
+        }
 
         int index = 0;
         for (File file1 : storage.getFiles()) {
-            if(file1 == null) {
-                try {
-                    storage.getFiles()[index] = file;
-                }catch (RuntimeException e) {
-                    System.out.println("file don't recorded");
-                }
-                    break;
+            if (file1 == null) {
+                storage.getFiles()[index] = file;
+                break;
             }
             index++;
         }
@@ -25,7 +22,6 @@ public class Controller {
     }
 
     public void delete(Storage storage, File file) {
-        testExceptionOnNull(storage, file);
 
         int index = 0;
         for (File file1 : storage.getFiles()) {
@@ -38,7 +34,6 @@ public class Controller {
     }
 
     public void transferAll(Storage storageFrom, Storage storageTo) {
-        testExceptionOnNull(storageFrom, storageTo);
 
         int index = quantityFilesInStorage(storageTo);
 
@@ -46,7 +41,7 @@ public class Controller {
             if (file1 == null)
                 break;
             for (File file : storageTo.getFiles()) {
-                if (testExceptionStorageOnFormats(storageTo, file1) && testExceptionFileOnIdWithStorage(storageTo, file1) && testExceptionStorageOnTheSize(storageTo)) {
+                if (testExceptionFormats(storageTo, file1) && testExceptionId(storageTo, file1) && testExceptionSize(storageTo)) {
                     storageTo.getFiles()[index] = file1;
                     break;
                 }
@@ -56,7 +51,6 @@ public class Controller {
     }
 
     public void transferFile(Storage storageFrom, Storage storageTo, long id) {
-        testExceptionOnNull(storageFrom, storageTo);
 
         int index = quantityFilesInStorage(storageTo);
 
@@ -64,7 +58,7 @@ public class Controller {
             if (file1 == null)
                 break;
             for (File file : storageTo.getFiles()) {
-                if (file1.getId() == id && testExceptionStorageOnFormats(storageTo, file1) && testExceptionFileOnIdWithStorage(storageTo, file1) && testExceptionStorageOnTheSize(storageTo)) {
+                if (file1.getId() == id && testExceptionFormats(storageTo, file1) && testExceptionId(storageTo, file1) && testExceptionSize(storageTo)) {
                     storageTo.getFiles()[index] = file1;
                     break;
                 }
@@ -81,26 +75,10 @@ public class Controller {
         return index;
     }
 
-    private void testExceptionOnNull(Storage storage, File file) {
-        if (storage == null || file == null)
-            throw new NullPointerException("Storage or file is null");
-    }
-
-    private void testExceptionOnNull(Storage storage, Storage storage1) {
-        if (storage == null || storage1 == null)
-            throw new NullPointerException("Storage or file is null");
-    }
-
     //проверка на формат
 
-    private boolean testExceptionStorageOnFormats(Storage storage, File file) {
-        if (!testStorageOnTheFormats(storage, file))
-            throw new RuntimeException("File " + file.getId() + " don't have a format " + file.getFormat() + " in a Storage.");
-        return true;
-    }
+    private boolean testExceptionFormats(Storage storage, File file) {
 
-    private boolean testStorageOnTheFormats(Storage storage, File file) {
-        //нужно сравнить формат файла с форматом всех возможных форматов storage
         boolean step = false;
         for (int i = 0; i < storage.getFormatsSupported().length; i++) {
             if (file.getFormat() == null)
@@ -109,48 +87,49 @@ public class Controller {
                 step = true;
             }
         }
-        return step;
+
+        if (!step)
+            throw new NoSuchElementException("File " + file.getId() + " don't have a format " + file.getFormat() + " in a Storage.");
+        return true;
     }
+
 
     //проверка на максимальный размер хранилища
 
-    private boolean testExceptionStorageOnTheSize(Storage storage) {
-        if (!testStorageOnTheSize(storage))
+    private boolean testExceptionSize(Storage storage) {
+        boolean step = false;
+        int index = 0;
+        for (File file : storage.getFiles())
+            index++;
+
+        if (storage.getStorageSize() <= index)
+            step = false;
+        step = true;
+
+        if (!step)
             throw new RuntimeException("Size a storage more than indicate - " + storage.getStorageSize());
         return true;
     }
 
-    private boolean testStorageOnTheSize(Storage storage) {
-        if (storage.getStorageSize() <= findQuantityFilesInStorage(storage))
-            return false;
-        return true;
-    }
-
-    private int findQuantityFilesInStorage(Storage storage) {
-        int index = 0;
-        for (File file : storage.getFiles())
-            index++;
-        return index;
-    }
-
     //проверка на одинаковые айди
 
-    private boolean testExceptionFileOnIdWithStorage(Storage storage, File file) {
-        if (!testFileOnIdWithStorage(storage, file)) {
+    private boolean testExceptionId(Storage storage, File file) {
+        boolean step = true;
+
+        for (File file1 : storage.getFiles()) {
+            if (file1 == null) {
+                step = true;
+                break;
+            }
+            if (file1.getId() == file.getId()) {
+                step = false;
+                break;
+            }
+        }
+
+        if (!step) {
             throw new RuntimeException("File " + file.getId() + " already exists in the storage");
         }
         return true;
     }
-
-    private boolean testFileOnIdWithStorage(Storage storage, File file) {
-        for (File file1 : storage.getFiles()) {
-            if (file1 == null)
-                return true;
-            if (file1.getId() == file.getId())
-                return false;
-        }
-        return true;
-    }
-
-
 }
