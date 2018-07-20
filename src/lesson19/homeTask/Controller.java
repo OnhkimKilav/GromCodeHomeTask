@@ -6,24 +6,19 @@ import java.util.NoSuchElementException;
  * Created by Valik on 04.06.2018.
  */
 public class Controller {
-    public File put(Storage storage, File file) throws RuntimeException {
-        try {
-            if (testExceptionFormats(storage, file) && testExceptionSize(storage) && testExceptionId(storage, file)) {
-            }
-        }catch (RuntimeException e) {
-            System.err.println("Error: " + e.getMessage());
-        }
+    public File put(Storage storage, File file) throws Exception {
+        if (testExceptionFormats(storage, file) && testExceptionSize(storage) && testExceptionId(storage, file)) {}
 
-        int index = 0;
-        for (File file1 : storage.getFiles()) {
-            if (file1 == null) {
-                storage.getFiles()[index] = file;
-                break;
+            int index = 0;
+            for (File file1 : storage.getFiles()) {
+                if (file1 == null) {
+                    storage.getFiles()[index] = file;
+                    break;
+                }
+                index++;
             }
-            index++;
+            return file;
         }
-        return file;
-    }
 
     public void delete(Storage storage, File file) {
 
@@ -37,7 +32,7 @@ public class Controller {
         }
     }
 
-    public void transferAll(Storage storageFrom, Storage storageTo) {
+    public void transferAll(Storage storageFrom, Storage storageTo) throws Exception {
 
         int index = quantityFilesInStorage(storageTo);
 
@@ -54,7 +49,7 @@ public class Controller {
         }
     }
 
-    public void transferFile(Storage storageFrom, Storage storageTo, long id) {
+    public void transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
 
         int index = quantityFilesInStorage(storageTo);
 
@@ -76,31 +71,33 @@ public class Controller {
             if (file != null)
                 index++;
         }
+
         return index;
     }
 
     //проверка на формат
 
-    private boolean testExceptionFormats(Storage storage, File file) {
+    private boolean testExceptionFormats(Storage storage, File file) throws Exception {
 
         boolean step = false;
-        for (int i = 0; i < storage.getFormatsSupported().length; i++) {
+        for (String string : storage.getFormatsSupported()) {
             if (file.getFormat() == null)
                 throw new NullPointerException("Format in the file " + file.getId() + " equal null");
-            if (file.getFormat().equals(storage.getFormatsSupported()[i])) {
+            if (file.getFormat().equals(string)) {
                 step = true;
             }
         }
 
         if (!step)
-            throw new NoSuchElementException("File " + file.getId() + " don't have a format " + file.getFormat() + " in a Storage.");
+            throw new Exception("File " + file.getId() + " don't have a format " + file.getFormat() + " in a Storage.");
+
         return true;
     }
 
 
     //проверка на максимальный размер хранилища
 
-    private boolean testExceptionSize(Storage storage) {
+    private boolean testExceptionSize(Storage storage) throws Exception {
         boolean step = false;
         int index = 0;
         for (File file : storage.getFiles())
@@ -111,13 +108,13 @@ public class Controller {
         step = true;
 
         if (!step)
-            throw new RuntimeException("Size a storage more than indicate - " + storage.getStorageSize());
+            throw new Exception("Size a storage more than indicate - " + storage.getStorageSize());
         return true;
     }
 
     //проверка на одинаковые айди
 
-    private boolean testExceptionId(Storage storage, File file) {
+    private boolean testExceptionId(Storage storage, File file) throws Exception {
         boolean step = true;
 
         for (File file1 : storage.getFiles()) {
@@ -131,9 +128,9 @@ public class Controller {
             }
         }
 
-        if (!step) {
-            throw new RuntimeException("File " + file.getId() + " already exists in the storage");
-        }
+        if (!step)
+            throw new Exception("File " + file.getId() + " already exists in the storage");
+
         return true;
     }
 }
