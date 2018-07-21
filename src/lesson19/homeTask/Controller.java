@@ -7,18 +7,19 @@ import java.util.NoSuchElementException;
  */
 public class Controller {
     public File put(Storage storage, File file) throws Exception {
-        if (testExceptionFormats(storage, file) && testExceptionSize(storage) && testExceptionId(storage, file)) {}
-
-            int index = 0;
-            for (File file1 : storage.getFiles()) {
-                if (file1 == null) {
-                    storage.getFiles()[index] = file;
-                    break;
-                }
-                index++;
-            }
-            return file;
+        if (testExceptionFormats(storage, file) && testExceptionSize(storage) && testExceptionId(storage, file)) {
         }
+
+        int index = 0;
+        for (File file1 : storage.getFiles()) {
+            if (file1 == null) {
+                storage.getFiles()[index] = file;
+                break;
+            }
+            index++;
+        }
+        return file;
+    }
 
     public void delete(Storage storage, File file) {
 
@@ -79,57 +80,43 @@ public class Controller {
 
     private boolean testExceptionFormats(Storage storage, File file) throws Exception {
 
-        boolean step = false;
         for (String string : storage.getFormatsSupported()) {
             if (file.getFormat() == null)
                 throw new NullPointerException("Format in the file " + file.getId() + " equal null");
             if (file.getFormat().equals(string)) {
-                step = true;
+                return true;
             }
         }
 
-        if (!step)
-            throw new Exception("File " + file.getId() + " don't have a format " + file.getFormat() + " in a Storage.");
-
-        return true;
+        throw new Exception("File " + file.getId() + " don't have a format " + file.getFormat() + " in a Storage.");
     }
 
 
     //проверка на максимальный размер хранилища
 
     private boolean testExceptionSize(Storage storage) throws Exception {
-        boolean step = false;
         int index = 0;
+
         for (File file : storage.getFiles())
             index++;
 
         if (storage.getStorageSize() <= index)
-            step = false;
-        step = true;
+            return true;
 
-        if (!step)
-            throw new Exception("Size a storage more than indicate - " + storage.getStorageSize());
-        return true;
+        throw new Exception("Size a storage more than indicate - " + storage.getStorageSize());
     }
 
     //проверка на одинаковые айди
 
     private boolean testExceptionId(Storage storage, File file) throws Exception {
-        boolean step = true;
 
         for (File file1 : storage.getFiles()) {
-            if (file1 == null) {
-                step = true;
-                break;
-            }
-            if (file1.getId() == file.getId()) {
-                step = false;
-                break;
-            }
-        }
+            if (file1 == null)
+                return true;
 
-        if (!step)
-            throw new Exception("File " + file.getId() + " already exists in the storage");
+            if (file1.getId() == file.getId())
+                throw new Exception("File " + file.getId() + " already exists in the storage");
+        }
 
         return true;
     }
