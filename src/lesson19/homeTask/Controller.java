@@ -101,9 +101,9 @@ public class Controller {
             index++;
 
         if (storage.getStorageSize() <= index)
-            return true;
+            throw new Exception("Size a storage more than indicate - " + storage.getStorageSize());
 
-        throw new Exception("Size a storage more than indicate - " + storage.getStorageSize());
+        return true;
     }
 
     //проверка на одинаковые айди
