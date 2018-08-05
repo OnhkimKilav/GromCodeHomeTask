@@ -7,9 +7,9 @@ import java.util.NoSuchElementException;
  */
 public class Controller {
     public File put(Storage storage, File file) throws Exception {
-        testExceptionFormats(storage, file);
-        testExceptionSize(storage);
-        testExceptionId(storage, file);
+        checkFormat(storage, file);
+        checkSize(storage);
+        checkId(storage, file);
         checkFreeCells(storage);
 
         int index = 0;
@@ -43,7 +43,7 @@ public class Controller {
             if (file1 == null)
                 break;
             for (File file : storageTo.getFiles()) {
-                if (testExceptionFormats(storageTo, file1) && testExceptionId(storageTo, file1) && testExceptionSize(storageTo)) {
+                if (checkFormat(storageTo, file1) && checkId(storageTo, file1) && checkSize(storageTo)) {
                     storageTo.getFiles()[index] = file1;
                     break;
                 }
@@ -60,7 +60,7 @@ public class Controller {
             if (file1 == null)
                 break;
             for (File file : storageTo.getFiles()) {
-                if (file1.getId() == id && testExceptionFormats(storageTo, file1) && testExceptionId(storageTo, file1) && testExceptionSize(storageTo)) {
+                if (file1.getId() == id && checkFormat(storageTo, file1) && checkId(storageTo, file1) && checkSize(storageTo)) {
                     storageTo.getFiles()[index] = file1;
                     break;
                 }
@@ -79,7 +79,7 @@ public class Controller {
     }
 
     private boolean checkFreeCells(Storage storage) throws Exception {
-        if(storage.getFiles()[storage.getFiles().length - 1] != null)
+        if (storage.getFiles()[storage.getFiles().length - 1] != null)
             throw new Exception("Storage is full");
 
         return true;
@@ -87,14 +87,14 @@ public class Controller {
 
     //проверка на формат
 
-    private boolean testExceptionFormats(Storage storage, File file) throws Exception {
+    private boolean checkFormat(Storage storage, File file) throws Exception {
+
+        if (file.getFormat() == null)
+            throw new NullPointerException("Format in the file " + file.getId() + " equal null");
 
         for (String string : storage.getFormatsSupported()) {
-            if (file.getFormat() == null)
-                throw new NullPointerException("Format in the file " + file.getId() + " equal null");
-            if (file.getFormat().equals(string)) {
+            if (file.getFormat().equals(string))
                 return true;
-            }
         }
 
         throw new Exception("File " + file.getId() + " don't have a format " + file.getFormat() + " in a Storage.");
@@ -103,17 +103,25 @@ public class Controller {
 
     //проверка на максимальный размер хранилища
 
-    private boolean testExceptionSize(Storage storage) throws Exception {
+    private boolean checkSize(Storage storage) throws Exception {
 
-        if (storage.getStorageSize() <= storage.getFiles().length)
-            throw new Exception("Size a storage more than indicate - " + storage.getStorageSize());
+        int index = 0;
+        for(File file : storage.getFiles()){
+            if(file != null)
+                index++;
+        }
+        if(index>=storage.getFiles().length)
+            throw new Exception("Size a storage more than indicate - " + storage.getFiles().length);
+
+        //if (storage.getStorageSize() <= storage.getFiles().length)
+
 
         return true;
     }
 
     //проверка на одинаковые айди
 
-    private boolean testExceptionId(Storage storage, File file) throws Exception {
+    private boolean checkId(Storage storage, File file) throws Exception {
 
         for (File file1 : storage.getFiles()) {
             if (file1 == null)
