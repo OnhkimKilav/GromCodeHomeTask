@@ -10,7 +10,6 @@ public class Controller {
         checkFormat(storage, file);
         checkSize(storage);
         checkId(storage, file);
-        checkFreeCells(storage);
 
         int index = 0;
         for (File file1 : storage.getFiles()) {
@@ -78,13 +77,6 @@ public class Controller {
         return index;
     }
 
-    private boolean checkFreeCells(Storage storage) throws Exception {
-        if (storage.getFiles()[storage.getFiles().length - 1] != null)
-            throw new Exception("Storage is full");
-
-        return true;
-    }
-
     //проверка на формат
 
     private boolean checkFormat(Storage storage, File file) throws Exception {
@@ -105,16 +97,8 @@ public class Controller {
 
     private boolean checkSize(Storage storage) throws Exception {
 
-        int index = 0;
-        for(File file : storage.getFiles()){
-            if(file != null)
-                index++;
-        }
-        if(index>=storage.getFiles().length)
-            throw new Exception("Size a storage more than indicate - " + storage.getFiles().length);
-
-        //if (storage.getStorageSize() <= storage.getFiles().length)
-
+        if (storage.getFiles()[storage.getFiles().length - 1] != null)
+            throw new Exception("Storage is full");
 
         return true;
     }
