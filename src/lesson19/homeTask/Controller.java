@@ -11,6 +11,9 @@ public class Controller {
         checkSize(storage);
         checkId(storage, file);
 
+        if(storage.getFiles().length<=quantityFilesInStorage(storage))
+            throw new Exception("Place in the array is over");
+
         int index = 0;
         for (File file1 : storage.getFiles()) {
             if (file1 == null) {
@@ -82,7 +85,7 @@ public class Controller {
     private boolean checkFormat(Storage storage, File file) throws Exception {
 
         if (file.getFormat() == null)
-            throw new NullPointerException("Format in the file " + file.getId() + " equal null");
+            throw new Exception("Format in the file " + file.getId() + " equal null");
 
         for (String string : storage.getFormatsSupported()) {
             if (file.getFormat().equals(string))
@@ -97,8 +100,8 @@ public class Controller {
 
     private boolean checkSize(Storage storage) throws Exception {
 
-        if (storage.getFiles()[storage.getFiles().length - 1] != null)
-            throw new Exception("Storage is full");
+        if (storage.getStorageSize() <= storage.getFiles().length)
+            throw new Exception("Size a storage more than indicate - " + storage.getStorageSize());
 
         return true;
     }
