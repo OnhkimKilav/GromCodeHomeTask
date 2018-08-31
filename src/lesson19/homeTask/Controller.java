@@ -10,9 +10,8 @@ public class Controller {
         checkFormat(storage, file);
         checkSize(storage);
         checkId(storage, file);
+        checkLengthArray(storage);
 
-        if(storage.getFiles().length<=quantityFilesInStorage(storage))
-            throw new Exception("Place in the array is over");
 
         int index = 0;
         for (File file1 : storage.getFiles()) {
@@ -78,6 +77,12 @@ public class Controller {
         }
 
         return index;
+    }
+
+    private boolean checkLengthArray(Storage storage) throws Exception {
+        if (storage.getFiles().length <= quantityFilesInStorage(storage))
+            throw new Exception("Place in the array is over");
+        return true;
     }
 
     //проверка на формат
