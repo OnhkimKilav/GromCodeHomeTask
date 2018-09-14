@@ -7,11 +7,7 @@ import java.util.NoSuchElementException;
  */
 public class Controller {
     public File put(Storage storage, File file) throws Exception {
-        checkFormat(storage, file);
-        checkSize(storage);
-        checkId(storage, file);
-        checkLengthArray(storage);
-
+        validate(storage, file);
 
         int index = 0;
         for (File file1 : storage.getFiles()) {
@@ -69,7 +65,14 @@ public class Controller {
         }
     }
 
-    private int quantityFilesInStorage(Storage storageTo) {
+    private static void validate(Storage storage, File file) throws Exception{
+        checkFormat(storage, file);
+        checkSize(storage);
+        checkId(storage, file);
+        checkLengthArray(storage);
+    }
+
+    private static int quantityFilesInStorage(Storage storageTo) {
         int index = 0;
         for (File file : storageTo.getFiles()) {
             if (file != null)
@@ -79,7 +82,7 @@ public class Controller {
         return index;
     }
 
-    private boolean checkLengthArray(Storage storage) throws Exception {
+    private static boolean checkLengthArray(Storage storage) throws Exception {
         if (storage.getFiles().length <= quantityFilesInStorage(storage))
             throw new Exception("Place in the array is over");
         return true;
@@ -87,7 +90,7 @@ public class Controller {
 
     //проверка на формат
 
-    private boolean checkFormat(Storage storage, File file) throws Exception {
+    private static boolean checkFormat(Storage storage, File file) throws Exception {
 
         if (file.getFormat() == null)
             throw new Exception("Format in the file " + file.getId() + " equal null");
@@ -103,7 +106,7 @@ public class Controller {
 
     //проверка на максимальный размер хранилища
 
-    private boolean checkSize(Storage storage) throws Exception {
+    private static boolean checkSize(Storage storage) throws Exception {
 
         if (storage.getStorageSize() <= storage.getFiles().length)
             throw new Exception("Size a storage more than indicate - " + storage.getStorageSize());
@@ -113,7 +116,7 @@ public class Controller {
 
     //проверка на одинаковые айди
 
-    private boolean checkId(Storage storage, File file) throws Exception {
+    private static boolean checkId(Storage storage, File file) throws Exception {
 
         for (File file1 : storage.getFiles()) {
             if (file1 == null)
