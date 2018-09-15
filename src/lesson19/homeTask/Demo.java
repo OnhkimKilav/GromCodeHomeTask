@@ -20,7 +20,7 @@ public class Demo {
         File file7Put = new File(1221, "ase34", "txt", 1);
         File file8Put = new File(1222, "ase34", "txt", 1);
         File file9Put = new File(1233, "ase34", "txt", 1);
-        //File file10Put = new File(1243, "ase34", "txt", 60);
+        File file10Put = new File(1243, "ase34", "txt", 60);
         Controller controller1 = new Controller();
         controller1.put(storagePut, filePut);
         controller1.put(storagePut, file1Put);
@@ -28,10 +28,10 @@ public class Demo {
         controller1.put(storagePut, file3Put);
         controller1.put(storagePut, file4Put);
         controller1.put(storagePut, file5Put);
-        //controller1.put(storagePut, file6Put);
-        //controller1.put(storagePut, file7Put);
-        //controller1.put(storagePut, file8Put);
-        //controller1.put(storagePut, file9Put);
+        controller1.put(storagePut, file6Put);
+        controller1.put(storagePut, file7Put);
+        controller1.put(storagePut, file8Put);
+        controller1.put(storagePut, file9Put);
         //controller1.put(storagePut, file10Put);
         print(storagePut);
         //метод Put() с ошибкой на формат
@@ -52,10 +52,10 @@ public class Demo {
 //        print(storagePut);
 //
 //
-//        System.out.println();
-//        //проверка метода delete()
-//        controller1.delete(storagePut, file3Put);
-//        print(storagePut);
+        System.out.println();
+        //проверка метода delete()
+        controller1.delete(storagePut, file10Put);
+        print(storagePut);
 //        //проверка метода delete() с пустым файлом
 ////        controller1.delete(storagePut, null);
 ////        print(storagePut);
@@ -76,18 +76,18 @@ public class Demo {
 //        print(storagePut);
 
         //проверка метода transferFile
-        System.out.println("transferFile");
-        Storage storageFile = new Storage(154, new File[10], new String[]{"txt", "pdf", "png", "jpg"}, "Ukrain", 200);
-        File file11Put = new File(1135, "phd22", "pdf", 46);
-        File file12Put = new File(1136, "phd22", "pdf", 46);
-        File file13Put = new File(1199, "phd22", "pdf", 46);
-        File file14Put = new File(1555, "phd22", "pdf", 46);
-        controller1.put(storageFile, file11Put);
-        controller1.put(storageFile, file12Put);
-        controller1.put(storageFile, file13Put);
-        controller1.put(storageFile, file14Put);
-        controller1.transferFile(storageFile, storagePut, 1136);
-        print(storagePut);
+//        System.out.println("transferFile");
+//        Storage storageFile = new Storage(154, new File[10], new String[]{"txt", "pdf", "png", "jpg"}, "Ukrain", 200);
+//        File file11Put = new File(1135, "phd22", "pdf", 46);
+//        File file12Put = new File(1136, "phd22", "pdf", 46);
+//        File file13Put = new File(1199, "phd22", "pdf", 46);
+//        File file14Put = new File(1555, "phd22", "pdf", 46);
+//        controller1.put(storageFile, file11Put);
+//        controller1.put(storageFile, file12Put);
+//        controller1.put(storageFile, file13Put);
+//        controller1.put(storageFile, file14Put);
+//        controller1.transferFile(storageFile, storagePut, 1136);
+//        print(storagePut);
 
 
     }
