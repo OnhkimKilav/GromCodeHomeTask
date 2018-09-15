@@ -1,5 +1,6 @@
 package lesson19.homeTask;
 
+import java.awt.*;
 import java.util.NoSuchElementException;
 
 /**
@@ -17,7 +18,7 @@ public class Controller {
             }
             index++;
         }
-        return file;
+        return storage.getFiles()[index];
     }
 
     public void delete(Storage storage, File file) {
@@ -40,10 +41,9 @@ public class Controller {
             if (file1 == null)
                 break;
             for (File file : storageTo.getFiles()) {
-                if (checkFormat(storageTo, file1) && checkId(storageTo, file1) && checkSize(storageTo)) {
-                    storageTo.getFiles()[index] = file1;
-                    break;
-                }
+                validate(storageTo, file1);
+                storageTo.getFiles()[index] = file1;
+                break;
             }
             index++;
         }
@@ -57,7 +57,8 @@ public class Controller {
             if (file1 == null)
                 break;
             for (File file : storageTo.getFiles()) {
-                if (file1.getId() == id && checkFormat(storageTo, file1) && checkId(storageTo, file1) && checkSize(storageTo)) {
+                validate(storageTo, file1);
+                if (file1.getId() == id) {
                     storageTo.getFiles()[index] = file1;
                     break;
                 }
@@ -65,11 +66,11 @@ public class Controller {
         }
     }
 
-    private static void validate(Storage storage, File file) throws Exception{
-        checkFormat(storage, file);
-        checkSize(storage);
+    private static void validate(Storage storage, File file) throws Exception {
         checkId(storage, file);
-        checkLengthArray(storage);
+        checkFormat(storage, file);
+        checkForFreePlace(storage);
+        checkSize(storage, file.getSize());
     }
 
     private static int quantityFilesInStorage(Storage storageTo) {
@@ -82,36 +83,39 @@ public class Controller {
         return index;
     }
 
-    private static boolean checkLengthArray(Storage storage) throws Exception {
-        if (storage.getFiles().length <= quantityFilesInStorage(storage))
-            throw new Exception("Place in the array is over");
-        return true;
+    private static void checkForFreePlace(Storage storage) throws Exception {
+        for (File file : storage.getFiles()) {
+            if (file == null)
+                return;
+        }
+        throw new Exception("No free place in storage " + storage.getId());
     }
+
 
     //проверка на формат
 
     private static boolean checkFormat(Storage storage, File file) throws Exception {
-
-        if (file.getFormat() == null)
-            throw new Exception("Format in the file " + file.getId() + " equal null");
-
         for (String string : storage.getFormatsSupported()) {
             if (file.getFormat().equals(string))
                 return true;
         }
 
-        throw new Exception("File " + file.getId() + " don't have a format " + file.getFormat() + " in a Storage.");
+        throw new Exception(file.getFormat() + "is not supported in storage " + storage.getId());
     }
 
 
     //проверка на максимальный размер хранилища
 
-    private static boolean checkSize(Storage storage) throws Exception {
+    private static void checkSize(Storage storage, long filesize) throws Exception {
 
-        if (storage.getStorageSize() <= storage.getFiles().length)
-            throw new Exception("Size a storage more than indicate - " + storage.getStorageSize());
+        long usedSize = 0;
+        for (File file : storage.getFiles()) {
+            if (file != null)
+                usedSize += file.getSize();
+        }
 
-        return true;
+        if (usedSize + filesize > storage.getStorageSize())
+            throw new Exception("No free space in storage " + storage.getId());
     }
 
     //проверка на одинаковые айди
@@ -119,11 +123,8 @@ public class Controller {
     private static boolean checkId(Storage storage, File file) throws Exception {
 
         for (File file1 : storage.getFiles()) {
-            if (file1 == null)
-                return true;
-
-            if (file1.getId() == file.getId())
-                throw new Exception("File " + file.getId() + " already exists in the storage");
+            if (file1 != null && file1.getId() == file.getId())
+                throw new Exception("File " + file.getId() + " already exist is storage " + storage.getId());
         }
 
         return true;
