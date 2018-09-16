@@ -28,10 +28,10 @@ public class Demo {
         controller1.put(storagePut, file3Put);
         controller1.put(storagePut, file4Put);
         controller1.put(storagePut, file5Put);
-        controller1.put(storagePut, file6Put);
-        controller1.put(storagePut, file7Put);
-        controller1.put(storagePut, file8Put);
-        controller1.put(storagePut, file9Put);
+//        controller1.put(storagePut, file6Put);
+//        controller1.put(storagePut, file7Put);
+//        controller1.put(storagePut, file8Put);
+        //controller1.put(storagePut, file9Put);
         //controller1.put(storagePut, file10Put);
         print(storagePut);
         //метод Put() с ошибкой на формат
@@ -54,7 +54,7 @@ public class Demo {
 //
         System.out.println();
         //проверка метода delete()
-        controller1.delete(storagePut, file10Put);
+        controller1.delete(storagePut, file8Put);
         print(storagePut);
 //        //проверка метода delete() с пустым файлом
 ////        controller1.delete(storagePut, null);

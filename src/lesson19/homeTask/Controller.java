@@ -23,12 +23,14 @@ public class Controller {
 
     public void delete(Storage storage, File file) throws Exception {
 
+        int value = 0;
         File fileDel = null;
         int index = 0;
         for (File file1 : storage.getFiles()) {
             if (file1 != null) {
                 if (file1.equals(file)) {
                     fileDel = file;
+                    value = index;
                 }
             }
             index++;
@@ -36,16 +38,7 @@ public class Controller {
         if (fileDel == null)
             throw new Exception("File " + file.toString() + " not found");
 
-        index = 0;
-        for (File file1 : storage.getFiles()) {
-            if (file1 != null) {
-                if (fileDel.equals(file1)) {
-                    storage.getFiles()[index] = null;
-                    break;
-                }
-            }
-            index++;
-        }
+        storage.getFiles()[value] = null;
     }
 
     public void transferAll(Storage storageFrom, Storage storageTo) throws Exception {
