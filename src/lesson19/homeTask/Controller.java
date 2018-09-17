@@ -20,24 +20,21 @@ public class Controller {
         return storage.getFiles()[index];
     }
 
-    public void delete(Storage storage, File file) throws Exception {
+    public File delete(Storage storage, File file) throws Exception {
 
-        int value = 0;
-        File fileDel = null;
+        if (file == null || storage.getFiles() == null){
+            return null;
+        }
+
         int index = 0;
-        for (File file1 : storage.getFiles()) {
-            if (file1 != null) {
-                if (file1.equals(file)) {
-                    fileDel = file;
-                    value = index;
-                }
+        for(File file1 : storage.getFiles()){
+            if (file1 != null && file1.getId() == file.getId()){
+                storage.getFiles()[index] = null;
+                break;
             }
             index++;
         }
-        if (fileDel == null)
-            throw new Exception("File " + file.toString() + " not found");
-
-        storage.getFiles()[value] = null;
+        return file;
     }
 
     public void transferAll(Storage storageFrom, Storage storageTo) throws Exception {
