@@ -1,6 +1,5 @@
 package lesson19.homeTask;
 
-import java.awt.*;
 import java.util.NoSuchElementException;
 
 /**

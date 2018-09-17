@@ -36,6 +36,19 @@ public class File {
         return size;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        File file1 = (File) o;
+
+        if (id != file1.id) return false;
+        if (size != file1.size) return false;
+        if (name != null ? !name.equals(file1.name) : file1.name != null) return false;
+        return format != null ? format.equals(file1.format) : file1.format == null;
+    }
+
     private boolean validateGetName(String name) {
         if (name == null)
             throw new NullPointerException("File name is equal null");
