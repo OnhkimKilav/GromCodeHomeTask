@@ -20,6 +20,7 @@ public class TransactionDAO {
         //количество транзакций за день большего указанного лимита +
         //если город оплаты (совершения транзакции) не разрешен +
         //не хватило места +
+        validate(transaction);
 
         int index = 0;
         for (Transaction tr : transactions) {

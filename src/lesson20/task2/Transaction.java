@@ -11,7 +11,7 @@ public class Transaction {
     private int amount;
     private String description;
     private TransactionType type;
-    private Date dateCtreated;
+    private Date dateCreated;
 
     public Transaction(long id, String city, int amount, String description, TransactionType type, Date dateCtreated) {
         this.id = id;
@@ -19,7 +19,7 @@ public class Transaction {
         this.amount = amount;
         this.description = description;
         this.type = type;
-        this.dateCtreated = dateCtreated;
+        this.dateCreated = dateCtreated;
     }
 
     public long getId() {
@@ -43,7 +43,22 @@ public class Transaction {
     }
 
     public Date getDateCtreated() {
-        return dateCtreated;
+        return dateCreated;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Transaction that = (Transaction) o;
+
+        if (id != that.id) return false;
+        if (amount != that.amount) return false;
+        if (city != null ? !city.equals(that.city) : that.city != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (type != that.type) return false;
+        return dateCreated != null ? dateCreated.equals(that.dateCreated) : that.dateCreated == null;
     }
 
 
@@ -55,7 +70,7 @@ public class Transaction {
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 ", type=" + type +
-                ", dateCtreated=" + dateCtreated +
+                ", dateCreated=" + dateCreated +
                 '}';
     }
 }
