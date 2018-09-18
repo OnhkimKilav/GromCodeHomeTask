@@ -42,7 +42,7 @@ public class Transaction {
         return type;
     }
 
-    public Date getDateCtreated() {
+    public Date getDateCreated() {
         return dateCreated;
     }
 

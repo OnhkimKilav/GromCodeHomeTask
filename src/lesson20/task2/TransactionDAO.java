@@ -40,7 +40,7 @@ public class TransactionDAO {
 
         int count = 0;
         int sum = 0;
-        for (Transaction tr : getTransactionsPerDay(transaction.getDateCtreated())) {
+        for (Transaction tr : getTransactionsPerDay(transaction.getDateCreated())) {
             sum += tr.getAmount();
             count++;
         }
@@ -122,7 +122,7 @@ public class TransactionDAO {
         int count = 0;
         for (Transaction transaction : transactions) {
             if (transaction != null) {
-                calendar.setTime(transaction.getDateCtreated());
+                calendar.setTime(transaction.getDateCreated());
                 int trMonth = calendar.get(Calendar.MONTH);
                 int trDay = calendar.get(Calendar.DAY_OF_MONTH);
 
@@ -135,7 +135,7 @@ public class TransactionDAO {
         int index = 0;
         for (Transaction transaction : transactions) {
             if (transaction != null) {
-                calendar.setTime(transaction.getDateCtreated());
+                calendar.setTime(transaction.getDateCreated());
                 int trMonth = calendar.get(Calendar.MONTH);
                 int trDay = calendar.get(Calendar.DAY_OF_MONTH);
 
