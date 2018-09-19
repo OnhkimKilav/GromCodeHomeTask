@@ -70,7 +70,15 @@ public class TransactionDAO {
     }
 
     Transaction[] transactionList() {
-        return transactions;
+        int index = 0;
+        Transaction[] transactions1 = new Transaction[transactions.length];
+        for (Transaction transaction : transactions) {
+            if (transaction != null) {
+                transactions1[index] = transaction;
+                index++;
+            }
+        }
+        return transactions1;
     }
 
     Transaction[] transactionList(String city) throws InternalServerException {
