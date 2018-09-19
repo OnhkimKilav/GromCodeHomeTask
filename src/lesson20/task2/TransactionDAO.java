@@ -81,7 +81,7 @@ public class TransactionDAO {
         return transactions1;
     }
 
-    Transaction[] transactionList(String city) throws InternalServerException {
+    Transaction[] transactionList(String city) throws BadRequestException {
         int countTrInCity = 0;
         int index = 0;
         for (Transaction transaction : transactions) {
@@ -92,7 +92,7 @@ public class TransactionDAO {
         }
 
         if (countTrInCity == 0)
-            throw new InternalServerException("Transactions don't contain city " + city + ".");
+            throw new BadRequestException("Transactions don't contain city " + city + ".");
 
         Transaction[] transactionsCi = new Transaction[countTrInCity];
         for (Transaction transaction : transactions) {

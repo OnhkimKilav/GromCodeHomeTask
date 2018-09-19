@@ -1,5 +1,6 @@
 package lesson20.task2;
 
+import lesson20.task1.exception.BadRequestException;
 import lesson20.task2.exception.InternalServerException;
 
 /**
@@ -16,7 +17,7 @@ public class Controller {
         return transactionDAO.transactionList();
     }
 
-    Transaction[] transactionList(String city) throws InternalServerException {
+    Transaction[] transactionList(String city) throws BadRequestException {
         return transactionDAO.transactionList(city);
     }
 
