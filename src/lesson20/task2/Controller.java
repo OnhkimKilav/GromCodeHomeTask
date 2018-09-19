@@ -21,7 +21,7 @@ public class Controller {
         return transactionDAO.transactionList(city);
     }
 
-    Transaction[] transactionList(int amount) throws InternalServerException {
+    Transaction[] transactionList(int amount) {
         return transactionDAO.transactionList(amount);
     }
 }

@@ -110,7 +110,7 @@ public class TransactionDAO {
         return transactionsCi;
     }
 
-    Transaction[] transactionList(int amount) throws InternalServerException {
+    Transaction[] transactionList(int amount) {
 
         int countTrByAmount = 0;
         int index = 0;
@@ -120,9 +120,6 @@ public class TransactionDAO {
                     countTrByAmount++;
             }
         }
-
-        if (countTrByAmount == 0)
-            throw new InternalServerException("Transactions don't contain amount " + amount + ".");
 
         Transaction[] transactionsAm = new Transaction[countTrByAmount];
         for (Transaction transaction : transactions) {
