@@ -78,18 +78,25 @@ public class TransactionDAO {
         int countTrInCity = 0;
         int index = 0;
         for (Transaction transaction : transactions) {
-            if (transaction.getCity().equals(city))
-                countTrInCity++;
+            if (transaction != null) {
+                if (transaction.getCity().equals(city))
+                    countTrInCity++;
+            }
         }
-        Transaction[] transactions = new Transaction[countTrInCity];
-        for (Transaction transaction : transactions) {
-            if (transaction.getCity().equals(city))
-                transactions[index] = transaction;
-        }
-        if(countTrInCity == 0)
+
+        if (countTrInCity == 0)
             throw new InternalServerException("Transactions don't contain city " + city + ".");
 
-        return transactions;
+        Transaction[] transactionsCi = new Transaction[countTrInCity];
+        for (Transaction transaction : transactions) {
+            if (transaction != null) {
+                if (transaction.getCity().equals(city)) {
+                    transactionsCi[index] = transaction;
+                    index++;
+                }
+            }
+        }
+        return transactionsCi;
     }
 
     Transaction[] transactionList(int amount) throws InternalServerException {
@@ -97,19 +104,25 @@ public class TransactionDAO {
         int countTrByAmount = 0;
         int index = 0;
         for (Transaction transaction : transactions) {
-            if (transaction.getAmount() == amount)
-                countTrByAmount++;
+            if (transaction != null) {
+                if (transaction.getAmount() == amount)
+                    countTrByAmount++;
+            }
         }
 
-        if(countTrByAmount == 0)
+        if (countTrByAmount == 0)
             throw new InternalServerException("Transactions don't contain amount " + amount + ".");
 
-        Transaction[] transactions = new Transaction[countTrByAmount];
+        Transaction[] transactionsAm = new Transaction[countTrByAmount];
         for (Transaction transaction : transactions) {
-            if (transaction.getAmount() == amount)
-                transactions[index] = transaction;
+            if (transaction != null) {
+                if (transaction.getAmount() == amount) {
+                    transactionsAm[index] = transaction;
+                    index++;
+                }
+            }
         }
-        return transactions;
+        return transactionsAm;
     }
 
     private Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {

@@ -1,5 +1,7 @@
 package lesson20.task2;
 
+import lesson20.task2.exception.InternalServerException;
+
 /**
  * Created by Valik on 18.09.2018.
  */
@@ -10,19 +12,15 @@ public class Controller {
         return transactionDAO.save(transaction);
     }
 
-    Transaction[] transactionList(){
+    Transaction[] transactionList() {
         return transactionDAO.transactionList();
     }
 
-    Transaction[] transactionList(String city){
-
-
-        return null;
+    Transaction[] transactionList(String city) throws InternalServerException {
+        return transactionDAO.transactionList(city);
     }
 
-    Transaction[] transactionList(int amount){
-
-
-        return null;
+    Transaction[] transactionList(int amount) throws InternalServerException {
+        return transactionDAO.transactionList(amount);
     }
 }
