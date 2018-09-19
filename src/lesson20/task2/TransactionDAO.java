@@ -48,7 +48,7 @@ public class TransactionDAO {
         if (sum > utils.getLimitTransactionsPerDayAmount())
             throw new LimitExceeded("Transaction limit per day amount exceeded " + transaction.getId() + ". Can't be saved");
 
-        if (count > utils.getLimitTransactionsPerDayCount())
+        if (count >= utils.getLimitTransactionsPerDayCount())
             throw new LimitExceeded("Transaction limit per day count exceeded " + transaction.getId() + ". Can't be saved");
 
         String str = null;
@@ -65,13 +65,12 @@ public class TransactionDAO {
             if (tr != null)
                 countTr++;
 
-        if (countTr > transactions.length)
+        if (countTr >= transactions.length)
             throw new InternalServerException("Count transactions is max. Transaction " + transaction.getId() + " can't be saved");
     }
 
     Transaction[] transactionList() {
         return transactions;
-
     }
 
     Transaction[] transactionList(String city) throws InternalServerException {
