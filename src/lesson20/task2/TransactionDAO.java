@@ -70,18 +70,10 @@ public class TransactionDAO {
     }
 
     Transaction[] transactionList() {
-        int index = 0;
-        Transaction[] transactions1 = new Transaction[transactions.length];
-        for (Transaction transaction : transactions) {
-            if (transaction != null) {
-                transactions1[index] = transaction;
-                index++;
-            }
-        }
-        return transactions1;
+        return transactions;
     }
 
-    Transaction[] transactionList(String city) throws BadRequestException {
+    Transaction[] transactionList(String city) {
         int countTrInCity = 0;
         int index = 0;
         for (Transaction transaction : transactions) {
@@ -90,9 +82,6 @@ public class TransactionDAO {
                     countTrInCity++;
             }
         }
-
-        if (countTrInCity == 0)
-            throw new BadRequestException("Transactions don't contain city " + city + ".");
 
         Transaction[] transactionsCi = new Transaction[countTrInCity];
         for (Transaction transaction : transactions) {

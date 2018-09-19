@@ -13,11 +13,11 @@ public class Controller {
         return transactionDAO.save(transaction);
     }
 
-    Transaction[] transactionList() throws InternalServerException {
+    Transaction[] transactionList() {
         return transactionDAO.transactionList();
     }
 
-    Transaction[] transactionList(String city) throws BadRequestException {
+    Transaction[] transactionList(String city) {
         return transactionDAO.transactionList(city);
     }
 
