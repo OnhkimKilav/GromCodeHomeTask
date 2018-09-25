@@ -3,16 +3,21 @@ package lesson25.HomeTask;
 /**
  * Created by Valik on 24.09.2018.
  */
-public class GeneralDAO<T>  {
+public class GeneralDAO<T> {
     @SuppressWarnings("unchecked")
-    T[] array = (T[]) new Object[10];
+    private T[] array = (T[]) new Object[10];
+    private int count = 0;
 
     public T save(T t) throws Exception {
         validate(t);
+        count++;
+
+        if (count >= array.length)
+            throw new Exception("Array is max. Can't be save.");
 
         int index = 0;
         for (T el : array) {
-            if(el == null){
+            if (el == null) {
                 array[index] = t;
                 return array[index];
             }
@@ -22,17 +27,17 @@ public class GeneralDAO<T>  {
     }
 
 
-    public T[] getAll(){
+    public T[] getAll() {
         int index = 0;
         int count = 0;
-        for(T el : array){
-            if(el != null)
+        for (T el : array) {
+            if (el != null)
                 count++;
         }
 
         T[] array1 = (T[]) new Object[count];
-        for(T el : array){
-            if(el != null) {
+        for (T el : array) {
+            if (el != null) {
                 array1[index] = el;
                 index++;
             }
@@ -40,16 +45,10 @@ public class GeneralDAO<T>  {
         return array1;
     }
 
-    private void validate(T t) throws Exception{
-        int count = 0;
-        for(T el : array){
-            if(t.equals(el))
+    private void validate(T t) throws Exception {
+        for (T el : array) {
+            if (t.equals(el))
                 throw new Exception(t + " is already exists. Can't be save.");
-            if(el != null)
-                count++;
         }
-
-        if(count >= array.length)
-            throw new Exception("Array is max. Can't be save.");
     }
 }
