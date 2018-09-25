@@ -8,7 +8,7 @@ public class GeneralDAO<T>  {
     T[] array = (T[]) new Object[10];
 
     public T save(T t) throws Exception {
-        validate();
+        validate(t);
 
         int index = 0;
         for (T el : array) {
@@ -18,7 +18,7 @@ public class GeneralDAO<T>  {
             }
             index++;
         }
-        throw new Exception("Error. Can't be save.");
+        throw new Exception("Array is full, the place is over. Can't be save.");
     }
 
 
@@ -40,9 +40,11 @@ public class GeneralDAO<T>  {
         return array1;
     }
 
-    private void validate() throws Exception{
+    private void validate(T t) throws Exception{
         int count = 0;
         for(T el : array){
+            if(t.equals(el))
+                throw new Exception(t + " is already exists. Can't be save.");
             if(el != null)
                 count++;
         }
