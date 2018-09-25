@@ -46,6 +46,8 @@ public class GeneralDAO<T> {
     }
 
     private void validate(T t) throws Exception {
+        if(t == null)
+            throw new Exception(t + " can't be null");
         for (T el : array) {
             if (t.equals(el))
                 throw new Exception(t + " is already exists. Can't be save.");
