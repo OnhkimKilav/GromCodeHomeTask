@@ -6,14 +6,9 @@ package lesson25.HomeTask;
 public class GeneralDAO<T> {
     @SuppressWarnings("unchecked")
     private T[] array = (T[]) new Object[10];
-    private int count = 0;
 
     public T save(T t) throws Exception {
         validate(t);
-        count++;
-
-        if (count >= array.length)
-            throw new Exception("Array is max. Can't be save.");
 
         int index = 0;
         for (T el : array) {
