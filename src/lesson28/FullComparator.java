@@ -8,13 +8,6 @@ import java.util.Comparator;
 public class FullComparator implements Comparator<Capability>{
     @Override
     public int compare(Capability o1, Capability o2) {
-        //если channelName не равно - сравниваю по нему
-        //если равно - перехожу к fingerprint
-        //если fingerprint не равно - сравниваю по нему
-        //если равно - перехожу к dateCreated
-        //если dateCreated не равно - сравниваю по нему
-        //если равно - объекты равны
-
         System.out.println("FullComparator is used");
 
         if(!o1.getChannelName().equals(o2))

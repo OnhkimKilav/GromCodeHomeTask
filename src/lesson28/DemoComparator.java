@@ -29,33 +29,14 @@ public class DemoComparator {
         capabilities.sort(new IsActiveComparator());
 
         System.out.println(capabilities);
-/*
+
         capabilities.sort(new DateComparator());
 
-        System.out.println(capabilities);*/
+        System.out.println(capabilities);
 
         capabilities.sort(new FullComparator());
 
         System.out.println(capabilities);
 
-
-        /*Comparator<Capability> comparator = new Comparator<Capability>() {
-            @Override
-            public int compare(Capability o1, Capability o2) {
-
-                //если channelName не равно - сравниваю по нему
-                //если равно - перехожу к fingerprint
-                //если fingerprint не равно - сравниваю по нему
-                //если равно - перехожу к dateCreated
-                //если dateCreated не равно - сравниваю по нему
-                //если равно - объекты равны
-
-                if(!o1.getChannelName().equals(o2))
-                    return o1.getChannelName().compareTo(o2.getChannelName());
-
-
-                return 0;
-            }
-        };*/
     }
 }

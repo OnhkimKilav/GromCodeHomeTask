@@ -45,18 +45,6 @@ public class Capability implements Comparable<Capability>{
     public int compareTo(Capability capability) {
         System.out.println("compareTo is used");
         return (int) (this.id - capability.getId());
-
-        //before: 1001, 1005, 900
-        //step1: 1001 - 1005 = -4
-        //after: 1001, 1005, 900
-
-        //before: 1001, 1005, 900
-        //step2: 1005 - 900 = 105
-        //after: 1001, 900, 1005
-
-        //before: 1001, 900, 1005
-        //step1: 1001 - 900 = 101
-        //after: 900, 1001, 1005
     }
 
     @Override
