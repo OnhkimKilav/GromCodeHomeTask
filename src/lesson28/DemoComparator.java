@@ -24,18 +24,8 @@ public class DemoComparator {
         capabilities.add(capability2);
         capabilities.add(capability3);
 
-        System.out.println(capabilities);
-
-        capabilities.sort(new IsActiveComparator());
-
-        System.out.println(capabilities);
-
-        capabilities.sort(new DateComparator());
-
-        System.out.println(capabilities);
 
         capabilities.sort(new FullComparator());
-
         System.out.println(capabilities);
 
     }
