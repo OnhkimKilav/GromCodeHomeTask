@@ -25,7 +25,10 @@ public class DemoComparator {
         capabilities.add(capability3);
 
 
-        capabilities.sort(new FullComparator());
+        capabilities.sort(new DateComparater());
+        //capabilities.sort(new IsActiveComparator());
+
+        //capabilities.sort(new FullComparator());
         System.out.println(capabilities);
 
     }

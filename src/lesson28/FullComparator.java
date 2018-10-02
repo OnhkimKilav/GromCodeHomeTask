@@ -15,7 +15,7 @@ public class FullComparator implements Comparator<Capability> {
         capabilityValidator.validator(o1.getChannelName(), o1.getFingerprint(), o1.getDateCreated());
         capabilityValidator.validator(o2.getChannelName(), o2.getFingerprint(), o2.getDateCreated());
 
-        if(!o1.isActive() && o2.isActive())
+        if(!o1.isActive() && o2.isActive() || o1.isActive() && !o2.isActive())
             new IsActiveComparator();
         else if (!o1.getChannelName().equals(o2))
             return o1.getChannelName().compareTo(o2.getChannelName());
