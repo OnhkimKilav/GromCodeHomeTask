@@ -15,7 +15,7 @@ public class DemoComparator {
         Date date1 = cal2.getTime();
 
         Capability capability1 = new Capability(1001, "test", "rrrr", true, date);
-        Capability capability2 = new Capability(1005, "test", "rrrr", false, new Date());
+        Capability capability2 = new Capability(1005, "test", "rrrr", false, null);
         Capability capability3 = new Capability(900, "test", "rrrr", true, date1);
 
         ArrayList<Capability> capabilities = new ArrayList<>();
@@ -25,7 +25,7 @@ public class DemoComparator {
         capabilities.add(capability3);
 
 
-        capabilities.sort(new DateComparator());
+        capabilities.sort(new FullComparator());
         //capabilities.sort(new IsActiveComparator());
 
         //capabilities.sort(new FullComparator());

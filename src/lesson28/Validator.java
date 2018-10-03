@@ -1,16 +1,21 @@
 package lesson28;
 
 /**
- * Created by Valik on 02.10.2018.
+ * Created by Valik on 03.10.2018.
  */
-public class Validator <T, K, V>{
+public class Validator<T, K> {
+    public int validator(T t, K k){
 
-    public void validator(T t, K k, V v) throws NullPointerException{
-        if(t.equals(null))
-            throw new NullPointerException(t + " can't be null");
-        else if(k.equals(null))
-            throw new NullPointerException(k + " can't be null");
-        else if(v.equals(null))
-            throw new NullPointerException(v + " can't be null");
+        try {
+            if (t.equals(null));
+        }catch (NullPointerException e) {
+            return 1;
+        }
+        try {
+            if (k.equals(null));
+        }catch (NullPointerException e) {
+            return -1;
+        }
+        return 0;
     }
 }
