@@ -6,7 +6,12 @@ package lesson28;
 public class Validator<T, K> {
     public int validator(T t, K k){
 
-        try {
+        if(t == null)
+            return 1;
+        else if(k == null)
+            return -1;
+
+        /*try {
             if (t.equals(null));
         }catch (NullPointerException e) {
             return 1;
@@ -15,7 +20,7 @@ public class Validator<T, K> {
             if (k.equals(null));
         }catch (NullPointerException e) {
             return -1;
-        }
+        }*/
         return 0;
     }
 }

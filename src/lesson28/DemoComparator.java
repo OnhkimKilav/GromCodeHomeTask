@@ -15,7 +15,7 @@ public class DemoComparator {
         Date date1 = cal2.getTime();
 
         Capability capability1 = new Capability(1001, "test", "rrrr", true, date);
-        Capability capability2 = new Capability(1005, "test", "rrrr", false, null);
+        Capability capability2 = new Capability(1005, null, "rrr", true, new Date());
         Capability capability3 = new Capability(900, "test", "rrrr", true, date1);
 
         ArrayList<Capability> capabilities = new ArrayList<>();
