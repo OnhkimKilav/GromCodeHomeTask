@@ -1,5 +1,6 @@
 package lesson30.hometask;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,6 +8,7 @@ import java.util.Set;
  * Created by Valik on 07.10.2018.
  */
 public class ProjectDAO {
+    public static ArrayList<Project> arrayListProjects = new ArrayList<>();
 
     public static Set<Project> projectsByEmployee(Employee employee) {
         if (employee == null)
@@ -14,8 +16,8 @@ public class ProjectDAO {
 
         Set<Project> projectSet = new HashSet<>();
 
-        for (Employee employee1 : Department.getEmployees()) {
-            if(Department.getEmployees() == null)
+        for (Employee employee1 : EmployeeDAO.arrayListEmployees) {
+            if(employee1 == null)
                 return null;
             if (employee1.equals(employee)) {
                 projectSet.addAll(employee.getProjects());
@@ -30,7 +32,7 @@ public class ProjectDAO {
 
         Set<Project> projects = new HashSet<>();
 
-        for(Project project : Employee.getProjects()){
+        for(Project project : arrayListProjects){
             if(project.getCustomer() == null)
                 return null;
             if(project.getCustomer().equals(customer))

@@ -13,7 +13,7 @@ public class Employee {
     private Date dateHired;
     private Position position;
     private Department department;
-    private static ArrayList<Project> projects;
+    private ArrayList<Project> projects;
 
     public Employee(String firstName, String lastName, Date dateHired, Position position, Department department, ArrayList<Project> projects) {
         this.firstName = firstName;
@@ -21,7 +21,7 @@ public class Employee {
         this.dateHired = dateHired;
         this.position = position;
         this.department = department;
-        Employee.projects =  projects;
+        this.projects =  projects;
     }
 
     public String getFirstName() {
@@ -44,7 +44,7 @@ public class Employee {
         return department;
     }
 
-    public static ArrayList<Project> getProjects() {
+    public ArrayList<Project> getProjects() {
         return projects;
     }
 

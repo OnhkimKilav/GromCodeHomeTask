@@ -8,18 +8,18 @@ import java.util.Collection;
  */
 public class Department {
     private DepartmentType type;
-    private static ArrayList<Employee> employees;
+    private ArrayList<Employee> employees;
 
     public Department(DepartmentType type, ArrayList<Employee> employees) {
         this.type = type;
-        Department.employees = employees;
+        this.employees = employees;
     }
 
     public DepartmentType getType() {
         return type;
     }
 
-    public static ArrayList<Employee> getEmployees() {
+    public ArrayList<Employee> getEmployees() {
         return employees;
     }
 
