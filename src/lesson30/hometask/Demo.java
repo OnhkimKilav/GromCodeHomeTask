@@ -26,12 +26,14 @@ public class Demo {
 
         Employee employee = new Employee("Vasy", "Pupkin", new Date(), Position.ANALYST, department, arrayListProjects);
         Employee employee1 = new Employee("Pety", "Cholohov", new Date(), Position.DESIGNER, department, arrayListProjects);
-        Employee employee2 = new Employee("Vova", "Botonov", new Date(), Position.DEVELOPER, department1, arrayListProjects);
+        Employee employee2 = new Employee("Vova", "Botonov", new Date(), Position.DEVELOPER, department1, null);
         Employee employee3 = new Employee("Lesha", "Prokofev", new Date(), Position.FINANCE, department, arrayListProjects);
+        Employee employee4 = new Employee("Genny", "Ignatiev", new Date(), Position.TEAM_LEAD, department, arrayListProjects);
         arrayListEmployees.add(employee);
         arrayListEmployees.add(employee1);
         arrayListEmployees.add(employee2);
         arrayListEmployees.add(employee3);
+        arrayListEmployees.add(employee4);
 
         Project project = new Project("Game", customer1);
         Project project1 = new Project("Design", customer2);
@@ -44,6 +46,20 @@ public class Demo {
 
         //System.out.println(controller.employeesByProject("Game"));
 
-        System.out.println(controller.projectsByEmployee(employee2));
+        //System.out.println(controller.projectsByEmployee(employee2));
+
+        //System.out.println(controller.employeesByDepartmentWithoutProject(department.getType()));
+
+        //System.out.println(controller.employeesWithoutProject());
+
+        //System.out.println(controller.employeesByTeamLead(employee4));
+
+        //System.out.println(controller.teamLeadsByEmployee(employee));
+
+        //System.out.println(controller.employeesByProjectEmployee(new Employee("Vasy", "Pupkin", new Date(), Position.ANALYST, department, arrayListProjects)));
+
+        //System.out.println(controller.projectsByCustomer(customer1));
+
+        System.out.println(controller.employeesByCustomerProjects(customer1));
     }
 }

@@ -25,4 +25,13 @@ public class Customer {
     public int getMonthlyPay() {
         return monthlyPay;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                ", monthlyPay=" + monthlyPay +
+                '}';
+    }
 }

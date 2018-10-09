@@ -15,13 +15,13 @@ public class Employee {
     private Department department;
     private static ArrayList<Project> projects;
 
-    public Employee(String firstName, String lastName, Date dateHired, Position position, Department department, Collection projects) {
+    public Employee(String firstName, String lastName, Date dateHired, Position position, Department department, ArrayList<Project> projects) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateHired = dateHired;
         this.position = position;
         this.department = department;
-        Employee.projects = (ArrayList<Project>) projects;
+        Employee.projects =  projects;
     }
 
     public String getFirstName() {

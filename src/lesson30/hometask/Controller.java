@@ -14,28 +14,32 @@ public class Controller {
         return ProjectDAO.projectsByEmployee(employee);
     }
 
-    public void employeesByDepartmentWithoutProject(DepartmentType departmentType){
-
+    public Set<Employee> employeesByDepartmentWithoutProject(DepartmentType departmentType){
+        return EmployeeDAO.employeesByDepartmentWithoutProject(departmentType);
     }
 
-    public void employeesByTeamLead(Employee lead){
-
+    public Set<Employee> employeesWithoutProject(){
+        return EmployeeDAO.employeesWithoutProject();
     }
 
-    public void teamLeadsByEmployee(Employee employee){
-
+    public Set<Employee> employeesByTeamLead(Employee lead){
+        return EmployeeDAO.employeesByTeamLead(lead);
     }
 
-    public void employeesByProjectEmployee(Employee employee){
-
+    public Set<Employee> teamLeadsByEmployee(Employee employee){
+        return EmployeeDAO.teamLeadsByEmployee(employee);
     }
 
-    public void projectsByCustomer(Customer customer){
-
+    public Set<Employee> employeesByProjectEmployee(Employee employee){
+        return EmployeeDAO.employeesByProjectEmployee(employee);
     }
 
-    public void employeesByCustomerProjects(Customer customer){
+    public Set<Project> projectsByCustomer(Customer customer){
+        return ProjectDAO.projectsByCustomer(customer);
+    }
 
+    public Set<Employee> employeesByCustomerProjects(Customer customer){
+        return EmployeeDAO.employeesByCustomerProjects(customer);
     }
 
 }

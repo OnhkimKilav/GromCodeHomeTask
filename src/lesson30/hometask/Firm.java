@@ -28,4 +28,13 @@ public class Firm {
     public Collection getCustomers() {
         return customers;
     }
+
+    @Override
+    public String toString() {
+        return "Firm{" +
+                "dateFounded=" + dateFounded +
+                ", departments=" + departments +
+                ", customers=" + customers +
+                '}';
+    }
 }
