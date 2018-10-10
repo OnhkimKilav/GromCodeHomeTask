@@ -66,10 +66,21 @@ public class EmployeeDAO {
         for (Employee employee : arrayListEmployees) {
             if (employee.getProjects() == null || employee.getPosition() == null)
                 return null;
-            if (!employee.getPosition().equals(Position.TEAM_LEAD) && employee.getProjects().equals(lead.getProjects()))
+            if (!employee.getPosition().equals(Position.TEAM_LEAD) && projectBetweenEmployees(lead, employee))
                 employees.add(employee);
         }
         return employees;
+    }
+
+    private static boolean projectBetweenEmployees(Employee lead, Employee employee){
+        for(Project project : employee.getProjects()){
+            for(Project project1 : lead.getProjects()){
+                if(project.equals(project1)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static Set<Employee> teamLeadsByEmployee(Employee employee) {
