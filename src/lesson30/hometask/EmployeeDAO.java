@@ -37,7 +37,7 @@ public class EmployeeDAO {
 
         for (Employee employee : arrayListEmployees) {
             if (employee.getDepartment() == null)
-                return null;
+                break;
             if (employee.getDepartment().getType().equals(departmentType) && employee.getProjects().size() == 0) {
                 employees.add(employee);
             }
@@ -49,38 +49,25 @@ public class EmployeeDAO {
         Set<Employee> employees = new HashSet<>();
 
         for (Employee employee : arrayListEmployees) {
-            if (employee.getProjects() == null)
+            if (employee.getProjects().size() == 0)
                 employees.add(employee);
         }
         return employees;
     }
 
     public static Set<Employee> employeesByTeamLead(Employee lead) {
-        if (lead == null || lead.getPosition() == null || lead.getProjects() == null)
-            return null;
-        else if (!lead.getPosition().equals(Position.TEAM_LEAD))
+        if (lead == null || lead.getPosition() == null || lead.getProjects() == null || !lead.getPosition().equals(Position.TEAM_LEAD))
             return null;
 
         Set<Employee> employees = new HashSet<>();
 
         for (Employee employee : arrayListEmployees) {
             if (employee.getProjects() == null || employee.getPosition() == null)
-                return null;
+                break;
             if (!employee.getPosition().equals(Position.TEAM_LEAD) && projectBetweenEmployees(lead, employee))
                 employees.add(employee);
         }
         return employees;
-    }
-
-    private static boolean projectBetweenEmployees(Employee lead, Employee employee){
-        for(Project project : employee.getProjects()){
-            for(Project project1 : lead.getProjects()){
-                if(project.equals(project1)){
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     public static Set<Employee> teamLeadsByEmployee(Employee employee) {
@@ -91,8 +78,8 @@ public class EmployeeDAO {
 
         for (Employee employee1 : arrayListEmployees) {
             if (employee1.getPosition() == null)
-                return null;
-            if (employee1.getPosition().equals(Position.TEAM_LEAD) && employee1.getProjects().equals(employee.getProjects()))
+                break;
+            if (employee1.getPosition().equals(Position.TEAM_LEAD) && projectBetweenEmployees(employee1, employee))
                 employees.add(employee1);
         }
 
@@ -125,11 +112,22 @@ public class EmployeeDAO {
         for (Employee employee : arrayListEmployees) {
             for (Project project : employee.getProjects()) {
                 if (project.getCustomer() == null)
-                    return null;
+                    break;
                 if (project.getCustomer().equals(customer))
                     employees.add(employee);
             }
         }
         return employees;
+    }
+
+    private static boolean projectBetweenEmployees(Employee lead, Employee employee) {
+        for (Project project : employee.getProjects()) {
+            for (Project project1 : lead.getProjects()) {
+                if (project.equals(project1)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

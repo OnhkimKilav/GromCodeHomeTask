@@ -34,7 +34,7 @@ public class ProjectDAO {
 
         for(Project project : arrayListProjects){
             if(project.getCustomer() == null)
-                return null;
+                break;
             if(project.getCustomer().equals(customer))
                 projects.add(project);
         }
