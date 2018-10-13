@@ -8,20 +8,17 @@ import java.util.Set;
  * Created by Valik on 07.10.2018.
  */
 public class EmployeeDAO {
-    public static ArrayList<Employee> arrayListEmployees = new ArrayList<>();
+    public static ArrayList<Employee> Employees = new ArrayList<>();
 
     public static Set<Employee> employeesByProject(String projectName) {
         Set<Employee> employees = new HashSet<>();
 
-        if (projectName == null)
-            return null;
-
-        for (Employee employee : arrayListEmployees) {
+        for (Employee employee : Employees) {
             if (employee.getProjects() == null)
-                return null;
+                continue;
             for (Project project : employee.getProjects()) {
                 if (project.getName() == null)
-                    break;
+                    continue;
                 if (project.getName().equals(projectName)) {
                     employees.add(employee);
                 }
@@ -32,12 +29,10 @@ public class EmployeeDAO {
 
     public static Set<Employee> employeesByDepartmentWithoutProject(DepartmentType departmentType) {
         Set<Employee> employees = new HashSet<>();
-        if (departmentType == null)
-            return null;
 
-        for (Employee employee : arrayListEmployees) {
+        for (Employee employee : Employees) {
             if (employee.getDepartment() == null)
-                break;
+                continue;
             if (employee.getDepartment().getType().equals(departmentType) && employee.getProjects().size() == 0) {
                 employees.add(employee);
             }
@@ -48,7 +43,7 @@ public class EmployeeDAO {
     public static Set<Employee> employeesWithoutProject() {
         Set<Employee> employees = new HashSet<>();
 
-        for (Employee employee : arrayListEmployees) {
+        for (Employee employee : Employees) {
             if (employee.getProjects().size() == 0)
                 employees.add(employee);
         }
@@ -56,14 +51,11 @@ public class EmployeeDAO {
     }
 
     public static Set<Employee> employeesByTeamLead(Employee lead) {
-        if (lead == null || lead.getPosition() == null || lead.getProjects() == null || !lead.getPosition().equals(Position.TEAM_LEAD))
-            return null;
-
         Set<Employee> employees = new HashSet<>();
 
-        for (Employee employee : arrayListEmployees) {
+        for (Employee employee : Employees) {
             if (employee.getProjects() == null || employee.getPosition() == null)
-                break;
+                continue;
             if (!employee.getPosition().equals(Position.TEAM_LEAD) && projectBetweenEmployees(lead, employee))
                 employees.add(employee);
         }
@@ -71,14 +63,11 @@ public class EmployeeDAO {
     }
 
     public static Set<Employee> teamLeadsByEmployee(Employee employee) {
-        if (employee == null)
-            return null;
-
         Set<Employee> employees = new HashSet<>();
 
-        for (Employee employee1 : arrayListEmployees) {
+        for (Employee employee1 : Employees) {
             if (employee1.getPosition() == null)
-                break;
+                continue;
             if (employee1.getPosition().equals(Position.TEAM_LEAD) && projectBetweenEmployees(employee1, employee))
                 employees.add(employee1);
         }
@@ -87,16 +76,14 @@ public class EmployeeDAO {
     }
 
     public static Set<Employee> employeesByProjectEmployee(Employee employee) {
-        if (employee == null || employee.getProjects() == null)
-            return null;
         Set<Employee> employees = new HashSet<>();
 
-        for (Employee employee1 : arrayListEmployees) {
+        for (Employee employee1 : Employees) {
             if (employee1.equals(employee))
                 continue;
             if (employee1.getProjects() == null || employee1.getPosition() == null || employee1.getDateHired() == null ||
                     employee1.getDepartment() == null || employee1.getFirstName() == null || employee1.getLastName() == null)
-                break;
+                continue;
             if (employee1.getProjects().equals(employee.getProjects()))
                 employees.add(employee1);
         }
@@ -104,15 +91,12 @@ public class EmployeeDAO {
     }
 
     public static Set<Employee> employeesByCustomerProjects(Customer customer) {
-        if (customer == null)
-            return null;
-
         Set<Employee> employees = new HashSet<>();
 
-        for (Employee employee : arrayListEmployees) {
+        for (Employee employee : Employees) {
             for (Project project : employee.getProjects()) {
                 if (project.getCustomer() == null)
-                    break;
+                    continue;
                 if (project.getCustomer().equals(customer))
                     employees.add(employee);
             }
