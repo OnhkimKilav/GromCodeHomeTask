@@ -79,10 +79,7 @@ public class EmployeeDAO {
         Set<Employee> employees = new HashSet<>();
 
         for (Employee employee1 : Employees) {
-            if (employee1.equals(employee))
-                continue;
-            if (employee1.getProjects() == null || employee1.getPosition() == null || employee1.getDateHired() == null ||
-                    employee1.getDepartment() == null || employee1.getFirstName() == null || employee1.getLastName() == null)
+            if (employee1.equals(employee) || employee1.getProjects() == null)
                 continue;
             if (employee1.getProjects().equals(employee.getProjects()))
                 employees.add(employee1);
@@ -95,10 +92,9 @@ public class EmployeeDAO {
 
         for (Employee employee : Employees) {
             for (Project project : employee.getProjects()) {
-                if (project.getCustomer() == null)
+                if (project.getCustomer() == null || !project.getCustomer().equals(customer))
                     continue;
-                if (project.getCustomer().equals(customer))
-                    employees.add(employee);
+                employees.add(employee);
             }
         }
         return employees;

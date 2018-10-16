@@ -56,6 +56,6 @@ public class Demo {
 
         //System.out.println(controller.projectsByCustomer(customer1));
 
-        //System.out.println(controller.employeesByCustomerProjects(customer1));
+        System.out.println(controller.employeesByCustomerProjects(customer1));
     }
 }
