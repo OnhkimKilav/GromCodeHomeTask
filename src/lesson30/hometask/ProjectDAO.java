@@ -9,28 +9,29 @@ import java.util.Set;
  */
 public class ProjectDAO {
     public static ArrayList<Project> Projects = new ArrayList<>();
+    public static ArrayList<Project> Projects1 = new ArrayList<>();
 
     public static Set<Project> projectsByEmployee(Employee employee) {
         Set<Project> projectSet = new HashSet<>();
 
         for (Employee employee1 : EmployeeDAO.Employees) {
-            if(employee1 == null)
+            if (employee1 == null || !employee1.equals(employee))
                 continue;
-            if (employee1.equals(employee)) {
-                projectSet.addAll(employee.getProjects());
-            }
+
+            projectSet.addAll(employee.getProjects());
+
         }
         return projectSet;
     }
 
-    public static Set<Project> projectsByCustomer(Customer customer){
+    public static Set<Project> projectsByCustomer(Customer customer) {
         Set<Project> projects = new HashSet<>();
 
-        for(Project project : Projects){
-            if(project.getCustomer() == null)
+        for (Project project : Projects) {
+            if (project.getCustomer() == null || !project.getCustomer().equals(customer))
                 continue;
-            if(project.getCustomer().equals(customer))
-                projects.add(project);
+
+            projects.add(project);
         }
         return projects;
     }
