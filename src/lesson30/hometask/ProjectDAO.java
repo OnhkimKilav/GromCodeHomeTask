@@ -15,10 +15,8 @@ public class ProjectDAO {
         Set<Project> projectSet = new HashSet<>();
 
         for (Employee employee1 : EmployeeDAO.Employees) {
-            if (employee1 == null || !employee1.equals(employee))
-                continue;
-
-            projectSet.addAll(employee.getProjects());
+            if (employee1 != null || employee1.equals(employee))
+                projectSet.addAll(employee.getProjects());
 
         }
         return projectSet;
@@ -28,10 +26,8 @@ public class ProjectDAO {
         Set<Project> projects = new HashSet<>();
 
         for (Project project : Projects) {
-            if (project.getCustomer() == null || !project.getCustomer().equals(customer))
-                continue;
-
-            projects.add(project);
+            if (project.getCustomer() != null || project.getCustomer().equals(customer))
+                projects.add(project);
         }
         return projects;
     }

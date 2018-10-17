@@ -48,7 +48,7 @@ public class Demo {
 
         //System.out.println(controller.employeesWithoutProject());
 
-        System.out.println(controller.employeesByTeamLead(employee4));
+        //System.out.println(controller.employeesByTeamLead(employee4));
 
         //System.out.println(controller.teamLeadsByEmployee(employee));
 

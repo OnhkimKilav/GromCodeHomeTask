@@ -17,10 +17,8 @@ public class EmployeeDAO {
             if (employee.getProjects() == null)
                 continue;
             for (Project project : employee.getProjects()) {
-                if (project.getName() == null || !project.getName().equals(projectName))
-                    continue;
-
-                employees.add(employee);
+                if (project.getName() != null || project.getName().equals(projectName))
+                    employees.add(employee);
 
             }
         }
@@ -31,10 +29,8 @@ public class EmployeeDAO {
         Set<Employee> employees = new HashSet<>();
 
         for (Employee employee : Employees) {
-            if (employee.getDepartment() == null || !(employee.getDepartment().getType().equals(departmentType) && employee.getProjects().size() == 0))
-                continue;
-
-            employees.add(employee);
+            if (employee.getDepartment() != null || employee.getDepartment().getType().equals(departmentType) && employee.getProjects().size() == 0)
+                employees.add(employee);
         }
         return employees;
     }
@@ -53,10 +49,8 @@ public class EmployeeDAO {
         Set<Employee> employees = new HashSet<>();
 
         for (Employee employee : Employees) {
-            if (employee.getProjects() == null || employee.getPosition() == null || !(!employee.getPosition().equals(Position.TEAM_LEAD) && projectBetweenEmployees(lead, employee)))
-                continue;
-
-            employees.add(employee);
+            if (employee.getProjects() != null || employee.getPosition() != null || !employee.getPosition().equals(Position.TEAM_LEAD) && projectBetweenEmployees(lead, employee))
+                employees.add(employee);
         }
         return employees;
     }
@@ -65,10 +59,8 @@ public class EmployeeDAO {
         Set<Employee> employees = new HashSet<>();
 
         for (Employee employee1 : Employees) {
-            if (employee1.getPosition() == null || !(employee1.getPosition().equals(Position.TEAM_LEAD) && projectBetweenEmployees(employee1, employee)))
-                continue;
-
-            employees.add(employee1);
+            if (employee1.getPosition() != null || employee1.getPosition().equals(Position.TEAM_LEAD) && projectBetweenEmployees(employee1, employee))
+                employees.add(employee1);
         }
 
         return employees;
@@ -78,10 +70,8 @@ public class EmployeeDAO {
         Set<Employee> employees = new HashSet<>();
 
         for (Employee employee1 : Employees) {
-            if (employee1.equals(employee) || employee1.getProjects() == null || !employee1.getProjects().equals(employee.getProjects()))
-                continue;
-
-            employees.add(employee1);
+            if (!employee1.equals(employee) || employee1.getProjects() != null || employee1.getProjects().equals(employee.getProjects()))
+                employees.add(employee1);
         }
         return employees;
     }
@@ -91,9 +81,8 @@ public class EmployeeDAO {
 
         for (Employee employee : Employees) {
             for (Project project : employee.getProjects()) {
-                if (project.getCustomer() == null || !project.getCustomer().equals(customer))
-                    continue;
-                employees.add(employee);
+                if (project.getCustomer() != null || project.getCustomer().equals(customer))
+                    employees.add(employee);
             }
         }
         return employees;
