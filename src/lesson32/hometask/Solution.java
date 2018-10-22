@@ -18,6 +18,7 @@ public class Solution {
             boolean point = true;
             String str = reader.readLine();
             String[] strings = str.split(" ");
+            validateLength(strings.length);
 
             for (String string : strings) {
                 if(!validateStr(string)){
@@ -40,6 +41,19 @@ public class Solution {
         }
 
         System.out.println(sum);
+    }
+
+    private static boolean validateLength(int size){
+        if(!(size == 10)){
+            if (countWrong == 1) {
+                countWrong--;
+                return false;
+            }
+            countWrong--;
+            System.out.println("You numbers are wrong. You have " + countWrong + " attempts to try again");
+            return false;
+        }
+        return true;
     }
 
     private static boolean validateStr(String str){
