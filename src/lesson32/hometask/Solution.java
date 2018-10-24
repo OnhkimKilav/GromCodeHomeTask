@@ -10,29 +10,28 @@ import java.io.InputStreamReader;
 public class Solution {
     private static int countWrong = 3;
 
-    public static void readNumber() throws IOException {
+    public static int readNumber() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int sum = 0;
 
-        while (sum == 0 && countWrong > 0) {
+        while (countWrong > 0) {
             String str = reader.readLine();
             String[] strings = str.split(" ");
+            int index = 0;
 
             for (String string : strings) {
                 int number = validate(string, strings.length);
-                if(number == -1) {
+                if (number == -1) {
                     sum = 0;
                     break;
                 }
                 sum += number;
+                index++;
             }
+            if (index == strings.length)
+                return sum;
         }
-        if (countWrong == 0) {
-            System.out.println("Your numbers are wrong. Number of attempts exceeded");
-            return;
-        }
-
-        System.out.println(sum);
+        throw new IOException("Your numbers are wrong. Number of attempts exceeded");
     }
 
     private static int validate(String str, int strLength) {
