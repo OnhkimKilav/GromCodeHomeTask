@@ -13,22 +13,19 @@ public class Solution {
     public static void readNumber() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int sum = 0;
-        int index;
 
-        while (countWrong > 0) {
+        while (sum == 0 && countWrong > 0) {
             String str = reader.readLine();
             String[] strings = str.split(" ");
-            index = 0;
 
             for (String string : strings) {
                 int number = validate(string, strings.length);
-                if(number == -1)
+                if(number == -1) {
+                    sum = 0;
                     break;
+                }
                 sum += number;
-                index++;
             }
-            if (index == strings.length )
-                break;
         }
         if (countWrong == 0) {
             System.out.println("Your numbers are wrong. Number of attempts exceeded");
