@@ -9,7 +9,13 @@ import java.io.*;
  */
 
 public class ReadWriteFile {
-    private void readFile(String path){
+
+    public static void main(String[] args) {
+        readFile("D:/Programs/YandexDisk/Программач Java/какие то файлы/test.txt");
+        writeFile("D:/Programs/YandexDisk/Программач Java/какие то файлы/test1.txt");
+    }
+
+    private static void readFile(String path){
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader(path));
@@ -31,7 +37,7 @@ public class ReadWriteFile {
         }
     }
 
-    private void writeFile(String path) {
+    private static void writeFile(String path) {
         BufferedWriter bufferedWriter = null;
         try {
             //TODO use other constructor
