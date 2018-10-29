@@ -8,21 +8,32 @@ import java.io.*;
 public class Solution {
     public static void trasferFileContent(String fileFromPath, String fileToPath) throws Exception {
         validate(fileFromPath, fileToPath);
-        readAndWriteContent(fileFromPath, fileToPath);
+        writeContent(fileToPath, readContent(fileFromPath));
         clearFile(fileFromPath);
     }
 
-    private static void readAndWriteContent(String fileFromPath, String fileToPath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileFromPath)); BufferedWriter writer = new BufferedWriter(new FileWriter(fileToPath, true))) {
+    private static StringBuffer readContent(String fileFromPath) {
+        StringBuffer res = new StringBuffer();
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileFromPath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                writer.write(line);
-                writer.append("\r\n");
+                res.append(line);
+                res.append("\r\n");
             }
         } catch (FileNotFoundException e) {
             System.err.println("File " + fileFromPath + " doesn't exist");
         } catch (IOException e) {
-            System.err.println("Reading or writing is fail");
+            System.err.println("Reading from file " + fileFromPath + " failed");
+        }
+
+        return res;
+    }
+
+    private static void writeContent(String path, StringBuffer contentToWrite) {
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, true))){
+            bufferedWriter.append(contentToWrite);
+        }catch (IOException e) {
+            System.err.println("Can't write to file");
         }
     }
 
