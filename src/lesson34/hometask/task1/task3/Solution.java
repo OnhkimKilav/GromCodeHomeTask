@@ -37,23 +37,14 @@ public class Solution {
     }
 
     private static void findingStringByWord(StringBuffer stringBuffer, String word) {
-        int endIndexDot = 0, startIndexDot = 0;
 
-        while (endIndexDot != -1) {
-
-            if (startIndexDot == 0)
-                startIndexDot = endIndexDot;
-            else startIndexDot = endIndexDot + 1;
-
-            endIndexDot = stringBuffer.indexOf(".", startIndexDot + 1);
-            if (endIndexDot != -1) {
-                String str = stringBuffer.substring(startIndexDot, endIndexDot + 1);
-
-                if (str.contains(word) && str.length() >= 10 && !str.contains("\r\n")) {
-                    trueString.append(str);
-                }
-                else falseString.append(str);
+        String s = String.valueOf(stringBuffer);
+        String[] strings = s.split("\\.");
+        for(String s1 : strings){
+            if (s1.contains(word) && s1.length() >= 10) {
+                trueString.append(s1 + ".");
             }
+            else falseString.append(s1 + ".");
         }
     }
 
