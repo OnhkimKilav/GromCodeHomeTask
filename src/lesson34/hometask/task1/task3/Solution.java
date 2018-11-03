@@ -6,18 +6,31 @@ import java.io.*;
  * Created by Valik on 29.10.2018.
  */
 public class Solution {
-    private static StringBuffer trueString = new StringBuffer();
-    private static StringBuffer falseString = new StringBuffer();
-
     public static void transferSentences(String fileFromPath, String fileToPath, String word) throws Exception {
         validate(fileFromPath, fileToPath);
+        String fileContent = readContent(fileFromPath).toString();
 
-        findingStringByWord(readContent(fileFromPath), word);
+        String[] sentences = fileContent.split(".");
 
-        writeContent(fileToPath, fileFromPath);
+        StringBuffer sentencesWithWord = new StringBuffer();
+        for(String sentence : sentences){
+            if(sentence.contains(word) && sentence.length() > 10){
+                sentencesWithWord.append(sentence).append(".");
+                fileContent = fileContent.replace(sentencesWithWord + ".", "");
+            }
+        }
+
+        StringBuffer fileToBackup = readContent(fileToPath);
+        try{
+            writeContent(fileFromPath, fileContent, false);
+            writeContent(fileToPath, sentencesWithWord, true);
+        }catch (IOException e){
+            writeContent(fileFromPath, fileContent, false);
+            writeContent(fileToPath, fileToBackup, false);
+        }
     }
 
-    private static StringBuffer readContent(String fileFromPath) {
+    private static StringBuffer readContent(String fileFromPath) throws IOException {
         StringBuffer res = new StringBuffer();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileFromPath))) {
             String line;
@@ -26,32 +39,16 @@ public class Solution {
                 res.append("\r\n");
             }
             res.replace(res.length() - 1, res.length(), "");
-
-        } catch (FileNotFoundException e) {
-            System.err.println("File " + fileFromPath + " doesn't exist");
-        } catch (IOException e) {
-            System.err.println("Reading from file " + fileFromPath + " failed");
+        }catch (IOException e){
+            throw new IOException("Reading from file " + fileFromPath + " failed", e);
         }
 
         return res;
     }
 
-    private static void findingStringByWord(StringBuffer stringBuffer, String word) {
-
-        String s = String.valueOf(stringBuffer);
-        String[] strings = s.split("\\.");
-        for(String s1 : strings){
-            if (s1.contains(word) && s1.length() >= 10) {
-                trueString.append(s1 + ".");
-            }
-            else falseString.append(s1 + ".");
-        }
-    }
-
-    private static void writeContent(String fileToPath, String fileFromPath) {
-        try (BufferedWriter writerFileTo = new BufferedWriter(new FileWriter(fileToPath, true)); BufferedWriter writerFileFrom = new BufferedWriter(new FileWriter(fileFromPath))) {
-            writerFileTo.append(trueString);
-            writerFileFrom.append(falseString);
+    private static <T extends CharSequence> void writeContent(String path, T contentToWrite, boolean append) throws IOException {
+        try (BufferedWriter writerFileTo = new BufferedWriter(new FileWriter(path, append))) {
+            writerFileTo.append(contentToWrite);
         } catch (IOException e) {
             System.err.println("Can't write to file");
         }
