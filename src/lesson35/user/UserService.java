@@ -1,5 +1,6 @@
 package lesson35.user;
 
+import lesson35.exception.UserLogInException;
 import lesson35.exception.UserNotRegisterException;
 
 /**
@@ -7,7 +8,7 @@ import lesson35.exception.UserNotRegisterException;
  */
 public class UserService {
     private UserDAO userDAO = new UserDAO();
-    public static boolean userLog = false;
+    public static String userLogName = null;
 
     public User registerUser(User user) throws Exception {
         //check business logic
@@ -24,6 +25,12 @@ public class UserService {
     public void logIn(String userName, String password) throws Exception {
         //прочитать всех юзеров с файла
         //проверить есть ли на файле юзер с таким именем и паролем
+        if(userName == null)
+            throw new IllegalArgumentException("User name can't be null");
+        if(password == null)
+            throw new IllegalArgumentException("Password can't be null");
+        if(userLogName != null)
+            throw new UserLogInException("User " + userLogName + " is currently logged in");
 
         String userContent = userDAO.logIn().toString();
         String[] users = userContent.split("\n");
@@ -33,7 +40,7 @@ public class UserService {
         for (String user : users) {
             String[] valuesUser = user.split(", ");
             if (valuesUser[1].equals(userName) && valuesUser[2].equals(password)) {
-                userLog = true;
+                userLogName = userName;
                 break;
             } else if (index == users.length - 1)
                 throw new UserNotRegisterException("User wasn't register. Or you aren't correct writing a password or an user name");
