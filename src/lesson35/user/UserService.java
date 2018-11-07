@@ -1,5 +1,6 @@
 package lesson35.user;
 
+import lesson35.Validate;
 import lesson35.exception.UserLogInException;
 import lesson35.exception.UserNotRegisterException;
 
@@ -14,10 +15,10 @@ public class UserService {
         //check business logic
         //нет пустых значений
 
-        checkNull(user.getCountry(), user);
-        checkNull(user.getPassword(), user);
-        checkNull(user.getType(), user);
-        checkNull(user.getUserName(), user);
+        Validate.checkNull(user.getCountry(), user);
+        Validate.checkNull(user.getPassword(), user);
+        Validate.checkNull(user.getType(), user);
+        Validate.checkNull(user.getUserName(), user);
 
         return userDAO.registerUser(user);
     }
@@ -48,8 +49,8 @@ public class UserService {
         }
     }
 
-    private <T> void checkNull(T t, User user) {
-        if (t == null)
-            throw new IllegalArgumentException("User " + user.getId() + " can't have null");
+    public void logOut(){
+        if(userLogName != null)
+            userLogName = null;
     }
 }

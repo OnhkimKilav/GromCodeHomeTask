@@ -1,5 +1,9 @@
 package lesson35.hotel;
 
+import java.util.Random;
+
+import static java.lang.Integer.MAX_VALUE;
+
 /**
  * Created by Valik on 05.11.2018.
  */
@@ -10,8 +14,9 @@ public class Hotel {
     private String city;
     private String street;
 
-    public Hotel(long id, String name, String country, String city, String street) {
-        this.id = id;
+    private Random random = new Random();
+    public Hotel(String name, String country, String city, String street) {
+        this.id = random.nextInt(MAX_VALUE);
         this.name = name;
         this.country = country;
         this.city = city;
@@ -36,5 +41,16 @@ public class Hotel {
 
     public String getStreet() {
         return street;
+    }
+
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                '}';
     }
 }

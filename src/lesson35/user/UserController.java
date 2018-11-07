@@ -13,4 +13,8 @@ public class UserController {
     public void logIn(String userName, String password) throws Exception {
         userService.logIn(userName, password);
     }
+
+    public void logOut(){
+        userService.logOut();
+    }
 }
