@@ -6,7 +6,11 @@ package lesson35.user;
 public class UserController {
     private UserService userService = new UserService();
 
-    public User registerUser(User user){
+    public User registerUser(User user) throws Exception {
         return userService.registerUser(user);
+    }
+
+    public void logIn(String userName, String password) throws Exception {
+        userService.logIn(userName, password);
     }
 }
