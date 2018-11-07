@@ -14,6 +14,6 @@ public class DemoUser {
         UserController userController = new UserController();
         //System.out.println(userController.registerUser(user));
         userController.logIn("Masha", "53421");
-        System.out.println(UserService.userLog);
+        System.out.println(UserService.userLogName);
     }
 }
