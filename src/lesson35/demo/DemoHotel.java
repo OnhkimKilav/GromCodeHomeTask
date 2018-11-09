@@ -12,6 +12,6 @@ public class DemoHotel {
         System.out.println("find hotel by name");
         System.out.println(hotelController.findHotelByName("Ug"));
         System.out.println("find hotel by city");
-        System.out.println(hotelController.findHotelByCity("Ukraine"));
+        //System.out.println(hotelController.findHotelByCity("Ukraine"));
     }
 }

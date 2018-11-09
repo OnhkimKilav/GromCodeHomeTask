@@ -1,7 +1,10 @@
 package lesson35.hotel;
 
+import lesson35.Validate;
 import lesson35.exception.UserLogInException;
 import lesson35.user.UserService;
+
+import java.util.ArrayList;
 
 /**
  * Created by Valik on 05.11.2018.
@@ -9,36 +12,38 @@ import lesson35.user.UserService;
 public class HotelService {
     private HotelDAO hotelDAO = new HotelDAO();
 
-    public StringBuffer findHotelByName(String name) throws Exception {
-        if(name == null)
+    public ArrayList<Hotel> findHotelByName(String name) throws Exception {
+        if (name == null)
             throw new IllegalArgumentException("Name can't be null");
-        if(UserService.userLogName == null)
-            throw new UserLogInException("Login to use this feature");
+        Validate.validateUserLogIn();
 
-        String userContent = hotelDAO.findHotelByName().toString();
-        return findHotel(userContent, name, 1);
+        ArrayList<Hotel> hotels = new ArrayList<>();
+        String hotelContent = hotelDAO.findHotelByName().toString();
+        for (Hotel hotel : findHotel(hotelContent)) {
+            if (hotel.getName().equals(name))
+                hotels.add(hotel);
+        }
+        return hotels;
     }
 
-    public StringBuffer findHotelByCity(String city) throws Exception {
-        if(city == null)
+    /*public StringBuffer findHotelByCity(String city) throws Exception {
+        if (city == null)
             throw new IllegalArgumentException("City can't be null");
-        if(UserService.userLogName == null)
-            throw new UserLogInException("Login to use this feature");
+        Validate.validateUserLogIn();
 
         String userContent = hotelDAO.findHotelByCity().toString();
         return findHotel(userContent, city, 2);
-    }
+    }*/
 
-    private <T> StringBuffer findHotel(String userContent, T t, int place){
+    private ArrayList<Hotel> findHotel(String userContent) {
         String[] users = userContent.split("\n");
 
-        StringBuffer res = new StringBuffer();
+        ArrayList<Hotel> hotels = new ArrayList<>();
         for (String user : users) {
             String[] valuesUser = user.split(", ");
-            if (valuesUser[place].equals(t)) {
-                res.append(user).append("\n");
-            }
+            hotels.add(new Hotel(valuesUser[0], valuesUser[1], valuesUser[2], valuesUser[3]));
         }
-        return res;
+
+        return hotels;
     }
 }

@@ -9,17 +9,20 @@ import java.io.*;
  */
 public class UserDAO {
     private static File fileUserDb = new File("D:\\Programs\\YandexDisk\\Программач Java\\какие то файлы\\UserDb.txt");
+    private byte valueWriteFile = 0;
+    private byte valueReadFile = 0;
     //считывание данных - считывание файла
     //обработка данных - маппинг данных
 
     public User registerUser(User user) throws Exception {
         //save user to db(file)
-        Validate.validateFileWrite(fileUserDb);
+        if (valueWriteFile == 0) {
+            Validate.validateFileWrite(fileUserDb);
+            valueWriteFile++;
+        }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileUserDb, true))) {
-            writer.write(String.valueOf(user.getId()));
-            writer.append(", ").append(user.getUserName()).append(", ").append(user.getPassword()).append(", ").append(user.getCountry()).append(", ").write(String.valueOf(user.getType()));
-            writer.append("\n");
+            writer.write(String.valueOf(user.getId()) + ", " + user.getUserName() + ", " + user.getPassword() + ", " + user.getCountry() + ", " + user.getType() + "\n");
         } catch (IOException e) {
             System.err.println("User " + user.getId() + " can't write to file");
         }
@@ -28,7 +31,14 @@ public class UserDAO {
     }
 
     public StringBuffer logIn() throws Exception {
-        Validate.validateFileRead(fileUserDb);
+        return readFile();
+    }
+
+    public StringBuffer readFile() throws Exception {
+        if (valueReadFile == 0) {
+            Validate.validateFileRead(fileUserDb);
+            valueReadFile++;
+        }
 
         StringBuffer res = new StringBuffer();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileUserDb))) {

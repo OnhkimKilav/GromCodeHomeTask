@@ -1,7 +1,6 @@
 package lesson35.user;
 
 import java.util.Random;
-import static java.lang.Integer.MAX_VALUE;
 
 /**
  * Created by Valik on 05.11.2018.
@@ -15,7 +14,15 @@ public class User {
 
     private Random random = new Random();
     public User(String userName, String password, String country, UserType type) {
-        this.id = random.nextInt(MAX_VALUE);
+        this.id = random.nextLong();
+        this.userName = userName;
+        this.password = password;
+        this.country = country;
+        this.type = type;
+    }
+
+    public User(long id, String userName, String password, String country, UserType type) {
+        this.id = id;
         this.userName = userName;
         this.password = password;
         this.country = country;
