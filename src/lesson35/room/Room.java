@@ -3,6 +3,7 @@ package lesson35.room;
 import lesson35.hotel.Hotel;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by Valik on 05.11.2018.
@@ -16,8 +17,9 @@ public class Room {
     private Date dateAvailableFrom;
     private Hotel hotel;
 
-    public Room(long id, int numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed, Date dateAvailableFrom, Hotel hotel) {
-        this.id = id;
+    private Random random = new Random();
+    public Room(int numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed, Date dateAvailableFrom, Hotel hotel) {
+        this.id = random.nextLong();
         this.numberOfGuests = numberOfGuests;
         this.price = price;
         this.breakfastIncluded = breakfastIncluded;

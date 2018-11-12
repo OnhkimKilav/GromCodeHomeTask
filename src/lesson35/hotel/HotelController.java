@@ -1,5 +1,7 @@
 package lesson35.hotel;
 
+import lesson35.exception.UserLogInException;
+
 import java.util.ArrayList;
 
 /**
@@ -12,7 +14,11 @@ public class HotelController {
         return hotelService.findHotelByName(name);
     }
 
-    /*public StringBuffer findHotelByCity(String city) throws Exception {
+    public ArrayList<Hotel> findHotelByCity(String city) throws Exception {
         return hotelService.findHotelByCity(city);
-    }*/
+    }
+
+    public void addHotel(Hotel hotel) throws Exception {
+        hotelService.addHotel(hotel);
+    }
 }

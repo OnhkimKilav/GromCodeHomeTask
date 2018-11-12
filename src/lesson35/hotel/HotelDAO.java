@@ -8,6 +8,8 @@ import java.io.*;
  * Created by Valik on 05.11.2018.
  */
 public class HotelDAO {
+    private byte valueWriteFile = 0;
+    private byte valueReadFile = 0;
     private static File fileHotelDb = new File("D:\\Programs\\YandexDisk\\Программач Java\\какие то файлы\\HotelDb.txt");
 
     public StringBuffer findHotelByName() throws Exception {
@@ -20,6 +22,10 @@ public class HotelDAO {
         Validate.validateFileRead(fileHotelDb);
 
         return findHotel();
+    }
+
+    public void addHotel(){
+
     }
 
     private StringBuffer findHotel(){

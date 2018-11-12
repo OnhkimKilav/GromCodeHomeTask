@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
  */
 public class UserService {
     private UserDAO userDAO = new UserDAO();
-    public static String userLogName = null;
+    public static User logInUser = null;
 
     public User registerUser(User user) throws Exception {
         //check business logic
@@ -28,8 +28,8 @@ public class UserService {
             throw new IllegalArgumentException("User name can't be null");
         if (password == null)
             throw new IllegalArgumentException("Password can't be null");
-        if (userLogName != null)
-            throw new UserLogInException("User " + userLogName + " is currently logged in");
+        if (logInUser != null)
+            throw new UserLogInException("User " + logInUser.getUserName() + " is currently logged in");
 
         String userContent = userDAO.logIn().toString();
         String[] fileUsers = userContent.split("\n");
@@ -41,7 +41,7 @@ public class UserService {
             String[] valuesUser = fileUser.split(", ");
             User user = new User(Long.parseLong(valuesUser[0]), valuesUser[1], valuesUser[2], valuesUser[3], UserType.valueOf(valuesUser[4]));
             if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
-                userLogName = userName;
+                logInUser = user;
                 break;
             } else if (index == fileUsers.length - 1)
                 throw new UserNotRegisterException("User wasn't register. Or you aren't correct writing a password or an user name");
@@ -51,8 +51,8 @@ public class UserService {
     }
 
     public void logOut() {
-        if (userLogName != null)
-            userLogName = null;
+        if (logInUser != null)
+            logInUser = null;
     }
 
     private void checkUserName(String userName) throws Exception {

@@ -1,12 +1,13 @@
 package lesson35;
 
 import lesson35.exception.UserLogInException;
+import lesson35.exception.UserNotAdminException;
 import lesson35.user.User;
 import lesson35.user.UserService;
+import lesson35.user.UserType;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Field;
 
 /**
  * Created by Valik on 07.11.2018.
@@ -28,7 +29,12 @@ public class Validate {
     }
 
     public static void validateUserLogIn() throws UserLogInException {
-        if (UserService.userLogName == null)
+        if (UserService.logInUser == null)
             throw new UserLogInException("Login to use this feature");
+    }
+
+    public static void validateUserType(User user) throws UserNotAdminException {
+        if(!user.getType().equals(UserType.ADMIN))
+            throw new UserNotAdminException("User " + user.getId() + " doesn't admin. You can't use this feature");
     }
 }
