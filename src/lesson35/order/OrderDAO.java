@@ -14,7 +14,7 @@ public class OrderDAO {
     private static File fileOrder = new File("D:\\Programs\\YandexDisk\\Программач Java\\какие то файлы\\Order.txt");
     private byte valueWriteFile = 0;
 
-    public Order bookRoom(Order order) throws Exception {
+    public void bookRoom(Order order) throws Exception {
         if (valueWriteFile == 0) {
             Validate.validateFileWrite(fileOrder);
             valueWriteFile++;
@@ -26,6 +26,5 @@ public class OrderDAO {
             System.err.println("Order " + order.getId() + " can't write to file");
         }
 
-        return order;
     }
 }
