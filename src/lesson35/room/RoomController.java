@@ -6,7 +6,7 @@ package lesson35.room;
 public class RoomController {
     private RoomService roomService = new RoomService();
 
-    public void bookRoom(long roomId, long userId, long hotelId){
-
+    public Room bookRoom(long roomId, long userId, long hotelId) throws Exception {
+        return roomService.bookRoom(roomId, userId, hotelId);
     }
 }

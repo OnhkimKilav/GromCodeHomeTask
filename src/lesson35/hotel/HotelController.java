@@ -18,6 +18,10 @@ public class HotelController {
         return hotelService.findHotelByCity(city);
     }
 
+    public Hotel findHotelById(Long id) throws Exception {
+        return hotelService.findHotelById(id);
+    }
+
     public void addHotel(Hotel hotel) throws Exception {
         hotelService.addHotel(hotel);
     }

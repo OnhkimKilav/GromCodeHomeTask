@@ -2,13 +2,19 @@ package lesson35.room;
 
 import lesson35.hotel.Hotel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 /**
  * Created by Valik on 05.11.2018.
  */
 public class Room {
+    private Random random = new Random();
+
     private long id;
     private int numberOfGuests;
     private double price;
@@ -17,7 +23,6 @@ public class Room {
     private Date dateAvailableFrom;
     private Hotel hotel;
 
-    private Random random = new Random();
     public Room(int numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed, Date dateAvailableFrom, Hotel hotel) {
         this.id = random.nextLong();
         this.numberOfGuests = numberOfGuests;
@@ -27,6 +32,17 @@ public class Room {
         this.dateAvailableFrom = dateAvailableFrom;
         this.hotel = hotel;
     }
+
+    public Room(long id, int numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed, Date dateAvailableFrom, Hotel hotel) {
+        this.id = id;
+        this.numberOfGuests = numberOfGuests;
+        this.price = price;
+        this.breakfastIncluded = breakfastIncluded;
+        this.petsAllowed = petsAllowed;
+        this.dateAvailableFrom = dateAvailableFrom;
+        this.hotel = hotel;
+    }
+
 
     public long getId() {
         return id;
@@ -40,11 +56,11 @@ public class Room {
         return price;
     }
 
-    public boolean isBreakfastIncluded() {
+    public boolean getBreakfastIncluded() {
         return breakfastIncluded;
     }
 
-    public boolean isPetsAllowed() {
+    public boolean getPetsAllowed() {
         return petsAllowed;
     }
 
@@ -55,4 +71,5 @@ public class Room {
     public Hotel getHotel() {
         return hotel;
     }
+
 }

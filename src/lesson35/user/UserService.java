@@ -4,6 +4,7 @@ import lesson35.exception.UserLogInException;
 import lesson35.exception.UserNotRegisterException;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 /**
  * Created by Valik on 05.11.2018.
@@ -19,6 +20,27 @@ public class UserService {
         checkUserName(user.getUserName());
 
         return userDAO.registerUser(user);
+    }
+
+    public User findUserById(Long id) throws Exception {
+        String userContent = userDAO.readFile().toString();
+        for(User user : findUser(userContent)){
+            if(user.getId() == id)
+                return user;
+        }
+        throw new NoSuchFieldError("User " + id + " don't found");
+    }
+
+    private ArrayList<User> findUser(String userContent) {
+        String[] users = userContent.split("\n");
+
+        ArrayList<User> users1 = new ArrayList<>();
+        for (String user : users) {
+            String[] valuesUser = user.split(", ");
+            users1.add(new User(Long.parseLong(valuesUser[0]), valuesUser[1], valuesUser[2], valuesUser[3], UserType.valueOf(valuesUser[4])));
+        }
+
+        return users1;
     }
 
     public void logIn(String userName, String password) throws Exception {
@@ -69,10 +91,9 @@ public class UserService {
         }
     }
 
-    private boolean checkNull(User user) throws IllegalAccessException {
+    private void checkNull(User user) throws IllegalAccessException {
         for (Field f : getClass().getDeclaredFields())
             if (f.get(this) != null)
                 throw new IllegalArgumentException("User " + user.getId() + "can't have null");
-        return true;
     }
 }

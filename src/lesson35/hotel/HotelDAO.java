@@ -24,6 +24,12 @@ public class HotelDAO {
         return findHotel();
     }
 
+    public StringBuffer findHotelById() throws Exception {
+        Validate.validateFileRead(fileHotelDb);
+
+        return findHotel();
+    }
+
     public void addHotel(){
 
     }

@@ -30,8 +30,6 @@ public class HotelService {
     }
 
     public ArrayList<Hotel> findHotelByCity(String city) throws Exception {
-        if (city == null)
-            throw new IllegalArgumentException("City can't be null");
         Validate.validateUserLogIn();
 
         ArrayList<Hotel> hotels = new ArrayList<>();
@@ -41,6 +39,16 @@ public class HotelService {
                 hotels.add(hotel);
         }
         return hotels;
+    }
+
+    public Hotel findHotelById(Long id) throws Exception {
+
+        String hotelContent = hotelDAO.findHotelById().toString();
+        for(Hotel hotel : findHotel(hotelContent)){
+            if(hotel.getId() == id)
+                return hotel;
+        }
+        throw new NoSuchFieldError("Hotel " + id + " don't found");
     }
 
     public void addHotel(Hotel hotel) throws Exception {
