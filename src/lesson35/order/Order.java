@@ -27,6 +27,15 @@ public class Order {
         this.moneyPaid = moneyPaid;
     }
 
+    public Order(long id, User user, Room room, Date dateFrom, Date dateTo, double moneyPaid) {
+        this.id = id;
+        this.user = user;
+        this.room = room;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.moneyPaid = moneyPaid;
+    }
+
     public long getId() {
         return id;
     }

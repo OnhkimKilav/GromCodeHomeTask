@@ -3,8 +3,6 @@ package lesson35.room;
 import lesson35.Validate;
 
 import java.io.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -60,7 +58,6 @@ public class RoomDAO {
     public String dateToStr(Date date){
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        String formatedDate = cal.get(Calendar.DATE) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.YEAR);
-        return formatedDate;
+        return cal.get(Calendar.DATE) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.YEAR);
     }
 }

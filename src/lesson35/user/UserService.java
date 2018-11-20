@@ -81,8 +81,6 @@ public class UserService {
         String userContent = userDAO.readFile().toString();
         String[] fileUsers = userContent.split("\n");
 
-        StringBuffer res = new StringBuffer();
-
         for (String fileUser : fileUsers) {
             String[] valuesUser = fileUser.split(", ");
             User user = new User(Long.parseLong(valuesUser[0]), valuesUser[1], valuesUser[2], valuesUser[3], UserType.valueOf(valuesUser[4]));
