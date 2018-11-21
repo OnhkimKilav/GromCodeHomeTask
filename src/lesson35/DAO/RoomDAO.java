@@ -1,7 +1,8 @@
-package lesson35.room;
+package lesson35.DAO;
 
-import lesson35.Content;
-import lesson35.Validate;
+import lesson35.util.Content;
+import lesson35.util.Validate;
+import lesson35.model.Room;
 
 import java.io.*;
 import java.util.Date;

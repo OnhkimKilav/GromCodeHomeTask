@@ -1,4 +1,4 @@
-package lesson35.user;
+package lesson35.model;
 
 import java.util.Random;
 

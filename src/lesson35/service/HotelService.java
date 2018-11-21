@@ -1,10 +1,8 @@
-package lesson35.hotel;
+package lesson35.service;
 
-import lesson35.Validate;
-import lesson35.exception.UserLogInException;
-import lesson35.exception.UserNotAdminException;
-import lesson35.user.User;
-import lesson35.user.UserService;
+import lesson35.DAO.HotelDAO;
+import lesson35.util.Validate;
+import lesson35.model.Hotel;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

@@ -1,4 +1,6 @@
-package lesson35.room;
+package lesson35.controller;
+
+import lesson35.service.RoomService;
 
 /**
  * Created by Valik on 05.11.2018.

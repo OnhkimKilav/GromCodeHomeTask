@@ -1,4 +1,7 @@
-package lesson35.user;
+package lesson35.controller;
+
+import lesson35.model.User;
+import lesson35.service.UserService;
 
 /**
  * Created by Valik on 05.11.2018.

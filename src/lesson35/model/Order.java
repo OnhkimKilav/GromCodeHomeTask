@@ -1,7 +1,4 @@
-package lesson35.order;
-
-import lesson35.room.Room;
-import lesson35.user.User;
+package lesson35.model;
 
 import java.util.Date;
 import java.util.Random;

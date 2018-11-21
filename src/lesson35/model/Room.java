@@ -1,12 +1,6 @@
-package lesson35.room;
+package lesson35.model;
 
-import lesson35.hotel.Hotel;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Random;
 
 /**

@@ -1,11 +1,12 @@
-package lesson35.room;
+package lesson35.service;
 
-import lesson35.Content;
+import lesson35.util.Content;
+import lesson35.DAO.RoomDAO;
 import lesson35.exception.RoomNotFindException;
-import lesson35.hotel.HotelController;
-import lesson35.order.Order;
-import lesson35.order.OrderController;
-import lesson35.user.UserService;
+import lesson35.controller.HotelController;
+import lesson35.model.Order;
+import lesson35.DAO.OrderDAO;
+import lesson35.model.Room;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,9 +16,11 @@ import java.util.Date;
  */
 public class RoomService {
     private RoomDAO roomDAO = new RoomDAO();
-    private OrderController orderController = new OrderController();
     private UserService userService = new UserService();
     private HotelController hotelController = new HotelController();
+    private OrderDAO orderDAO = new OrderDAO();
+    private OrderService orderService = new OrderService();
+    private HotelService hotelService = new HotelService();
 
     public void bookRoom(long roomId, long userId, long hotelId) throws Exception {
         //проверить комнату на бронь
@@ -27,7 +30,7 @@ public class RoomService {
         for (Room room : findRoom(roomDAO.readFile().toString())) {
             if(room.getId() == roomId && room.getHotel().getId() == hotelId && (new Date().getTime() - Long.parseLong(String.valueOf(room.getDateAvailableFrom())) >= 0)) {
                 Order order = new Order(userService.findUserById(userId), room, new Date(), dateTo(), room.getPrice());
-                orderController.bookRoom(order);
+                orderDAO.writeOrder(order);
                 roomDAO.bookRoom(room, dateTo());
                 continue;
             }
@@ -39,7 +42,7 @@ public class RoomService {
     public void cancelReservation(long roomId, long userId) throws Exception {
         for (Room room : findRoom(roomDAO.readFile().toString())) {
             if(room.getId() == roomId) {
-                orderController.cancelReservation(roomId, userId);
+                orderService.cancelReservation(roomId, userId);
                 roomDAO.bookRoom(room, new Date());
                 continue;
             }
@@ -61,7 +64,7 @@ public class RoomService {
         ArrayList<Room> rooms1 = new ArrayList<>();
         for (String room : rooms) {
             String[] valuesRoom = room.split(", ");
-            rooms1.add(new Room(Long.valueOf(valuesRoom[0]), Integer.valueOf(valuesRoom[1]), Double.valueOf(valuesRoom[2]), Boolean.valueOf(valuesRoom[3]), Boolean.valueOf(valuesRoom[4]), Content.strToDate(valuesRoom[5]), hotelController.findHotelById(Long.valueOf(valuesRoom[6]))));
+            rooms1.add(new Room(Long.valueOf(valuesRoom[0]), Integer.valueOf(valuesRoom[1]), Double.valueOf(valuesRoom[2]), Boolean.valueOf(valuesRoom[3]), Boolean.valueOf(valuesRoom[4]), Content.strToDate(valuesRoom[5]), hotelService.findHotelById(Long.valueOf(valuesRoom[6]))));
         }
 
         return rooms1;

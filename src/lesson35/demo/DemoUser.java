@@ -1,10 +1,6 @@
 package lesson35.demo;
 
-import lesson35.user.User;
-import lesson35.user.UserController;
-import lesson35.user.UserType;
-
-import java.io.File;
+import lesson35.controller.UserController;
 
 /**
  * Created by Valik on 05.11.2018.

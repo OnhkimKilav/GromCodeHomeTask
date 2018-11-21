@@ -1,4 +1,4 @@
-package lesson35.hotel;
+package lesson35.model;
 
 import java.util.Random;
 

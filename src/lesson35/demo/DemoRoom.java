@@ -1,9 +1,9 @@
 package lesson35.demo;
 
-import lesson35.hotel.Hotel;
-import lesson35.room.Room;
-import lesson35.room.RoomDAO;
-import lesson35.room.RoomService;
+import lesson35.model.Hotel;
+import lesson35.model.Room;
+import lesson35.DAO.RoomDAO;
+import lesson35.service.RoomService;
 
 import java.text.ParseException;
 import java.util.Date;

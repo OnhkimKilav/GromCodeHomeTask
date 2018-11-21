@@ -1,4 +1,7 @@
-package lesson35.hotel;
+package lesson35.controller;
+
+import lesson35.model.Hotel;
+import lesson35.service.HotelService;
 
 import java.util.ArrayList;
 
@@ -14,10 +17,6 @@ public class HotelController {
 
     public ArrayList<Hotel> findHotelByCity(String city) throws Exception {
         return hotelService.findHotelByCity(city);
-    }
-
-    public Hotel findHotelById(Long id) throws Exception {
-        return hotelService.findHotelById(id);
     }
 
     public void addHotel(Hotel hotel) throws Exception {

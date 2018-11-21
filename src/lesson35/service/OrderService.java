@@ -1,8 +1,8 @@
-package lesson35.order;
+package lesson35.service;
 
-import lesson35.Content;
-import lesson35.room.RoomService;
-import lesson35.user.UserService;
+import lesson35.util.Content;
+import lesson35.DAO.OrderDAO;
+import lesson35.model.Order;
 
 /**
  * Created by Valik on 05.11.2018.
@@ -11,10 +11,6 @@ public class OrderService {
     private OrderDAO orderDAO = new OrderDAO();
     private UserService userService = new UserService();
     private RoomService roomService = new RoomService();
-
-    public void bookRoom(Order order) throws Exception {
-        orderDAO.writeOrder(order);
-    }
 
     public void cancelReservation(Long roomId, Long userId) throws Exception {
         String orderContent = orderDAO.readOrder().toString();

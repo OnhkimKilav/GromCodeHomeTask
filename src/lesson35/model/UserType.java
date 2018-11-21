@@ -1,4 +1,4 @@
-package lesson35.user;
+package lesson35.model;
 
 /**
  * Created by Valik on 05.11.2018.
