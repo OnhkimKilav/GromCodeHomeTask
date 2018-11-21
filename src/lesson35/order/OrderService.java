@@ -1,5 +1,6 @@
 package lesson35.order;
 
+import lesson35.Content;
 import lesson35.room.RoomService;
 import lesson35.user.UserService;
 
@@ -16,13 +17,13 @@ public class OrderService {
     }
 
     public void cancelReservation(Long roomId, Long userId) throws Exception {
-        String userContent = orderDAO.readOrder().toString();
-        String[] fileUsers = userContent.split("\n");
+        String orderContent = orderDAO.readOrder().toString();
+        String[] fileOrders = orderContent.split("\n");
         orderDAO.cleaningFile();
 
-        for (String fileRoom : fileUsers) {
-            String[] valuesRoom = fileRoom.split(", ");
-            Order order = new Order(Long.valueOf(valuesRoom[0]), userService.findUserById(Long.valueOf(valuesRoom[1])), roomService.findRoomById(Long.valueOf(valuesRoom[2])), roomService.strToDate(valuesRoom[3]), roomService.strToDate(valuesRoom[4]), Double.valueOf(valuesRoom[5]));
+        for (String fileOrder : fileOrders) {
+            String[] valuesOrder = fileOrder.split(", ");
+            Order order = new Order(Long.valueOf(valuesOrder[0]), userService.findUserById(Long.valueOf(valuesOrder[1])), roomService.findRoomById(Long.valueOf(valuesOrder[2])), Content.strToDate(valuesOrder[3]), Content.strToDate(valuesOrder[4]), Double.valueOf(valuesOrder[5]));
             if (!(order.getRoom().getId() == roomId) && !(order.getUser().getId() == userId))
                 orderDAO.writeOrder(order);
         }

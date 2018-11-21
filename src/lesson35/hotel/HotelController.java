@@ -1,7 +1,5 @@
 package lesson35.hotel;
 
-import lesson35.exception.UserLogInException;
-
 import java.util.ArrayList;
 
 /**

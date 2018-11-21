@@ -1,5 +1,6 @@
 package lesson35.order;
 
+import lesson35.Content;
 import lesson35.Validate;
 
 import java.io.*;
@@ -13,13 +14,10 @@ public class OrderDAO {
     private byte valueReadFile = 0;
 
     public void writeOrder(Order order) throws Exception {
-        if (valueWriteFile == 0) {
-            Validate.validateFileWrite(fileOrder);
-            valueWriteFile++;
-        }
+        valueWriteFile = Validate.validateValueWriteReadFile(valueWriteFile, fileOrder);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileOrder, true))) {
-            writer.write(String.valueOf(order.getId()) + ", " + order.getUser() + ", " + order.getRoom() + ", " + order.getDateFrom() + ", " + order.getDateTo() + ", " + order.getMoneyPaid() + "\n");
+            writer.write(String.valueOf(order.getId()) + ", " + order.getUser() + ", " + order.getRoom() + ", " + Content.dateToStr(order.getDateFrom()) + ", " + Content.dateToStr(order.getDateTo()) + ", " + order.getMoneyPaid() + "\n");
         } catch (IOException e) {
             System.err.println("Order " + order.getId() + " can't write to file");
         }
@@ -27,38 +25,14 @@ public class OrderDAO {
     }
 
     public StringBuffer readOrder() throws Exception {
-        if (valueReadFile == 0) {
-            Validate.validateFileRead(fileOrder);
-            valueReadFile++;
-        }
+        valueReadFile = Validate.validateValueWriteReadFile(valueReadFile, fileOrder);
 
-        StringBuffer res = new StringBuffer();
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileOrder))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                res.append(line);
-                res.append("\n");
-            }
-            res.replace(res.length() - 1, res.length(), "");
-        } catch (FileNotFoundException e) {
-            System.err.println("File doesn't exist");
-        } catch (IOException e) {
-            System.out.println("Reading from file " + fileOrder.toPath() + " failed");
-        }
-
-        return res;
+        return Content.readFile(fileOrder);
     }
 
     public void cleaningFile() throws Exception {
-        if (valueWriteFile == 0) {
-            Validate.validateFileWrite(fileOrder);
-            valueWriteFile++;
-        }
+        valueWriteFile = Validate.validateValueWriteReadFile(valueWriteFile, fileOrder);
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileOrder))) {
-            writer.append("");
-        } catch (IOException e) {
-            System.err.println("FileOrder " + fileOrder.toPath() + " can't cleaning");
-        }
+        Content.cleaningFile(fileOrder);
     }
 }

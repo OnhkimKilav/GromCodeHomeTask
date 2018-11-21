@@ -1,5 +1,6 @@
 package lesson35.hotel;
 
+import lesson35.Content;
 import lesson35.Validate;
 
 import java.io.*;
@@ -13,42 +14,24 @@ public class HotelDAO {
     private static File fileHotelDb = new File("D:\\Programs\\YandexDisk\\Программач Java\\какие то файлы\\HotelDb.txt");
 
     public StringBuffer findHotelByName() throws Exception {
-        Validate.validateFileRead(fileHotelDb);
+        valueReadFile = Validate.validateValueWriteReadFile(valueReadFile, fileHotelDb);
 
-        return findHotel();
+        return Content.readFile(fileHotelDb);
     }
 
     public StringBuffer findHotelByCity() throws Exception {
-        Validate.validateFileRead(fileHotelDb);
+        valueReadFile = Validate.validateValueWriteReadFile(valueReadFile, fileHotelDb);
 
-        return findHotel();
+        return Content.readFile(fileHotelDb);
     }
 
     public StringBuffer findHotelById() throws Exception {
-        Validate.validateFileRead(fileHotelDb);
+        valueReadFile = Validate.validateValueWriteReadFile(valueReadFile, fileHotelDb);
 
-        return findHotel();
+        return Content.readFile(fileHotelDb);
     }
 
     public void addHotel(){
 
-    }
-
-    private StringBuffer findHotel(){
-        StringBuffer res = new StringBuffer();
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileHotelDb))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                res.append(line);
-                res.append("\n");
-            }
-            res.replace(res.length() - 1, res.length(), "");
-        } catch (FileNotFoundException e) {
-            System.err.println("File doesn't exist");
-        } catch (IOException e) {
-            System.out.println("Reading from file " + fileHotelDb.toPath() + " failed");
-        }
-
-        return res;
     }
 }

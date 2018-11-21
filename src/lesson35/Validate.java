@@ -8,6 +8,7 @@ import lesson35.user.UserType;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Field;
 
 /**
  * Created by Valik on 07.11.2018.
@@ -36,5 +37,13 @@ public class Validate {
     public static void validateUserType(User user) throws UserNotAdminException {
         if(!user.getType().equals(UserType.ADMIN))
             throw new UserNotAdminException("User " + user.getId() + " doesn't admin. You can't use this feature");
+    }
+
+    public static Byte validateValueWriteReadFile(Byte value, File path) throws Exception {
+        if (value == 0) {
+            validateFileWrite(path);
+            value++;
+        }
+        return value;
     }
 }

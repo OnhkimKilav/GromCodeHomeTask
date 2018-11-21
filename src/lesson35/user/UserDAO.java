@@ -1,5 +1,6 @@
 package lesson35.user;
 
+import lesson35.Content;
 import lesson35.Validate;
 
 import java.io.*;
@@ -16,10 +17,7 @@ public class UserDAO {
 
     public User registerUser(User user) throws Exception {
         //save user to db(file)
-        if (valueWriteFile == 0) {
-            Validate.validateFileWrite(fileUserDb);
-            valueWriteFile++;
-        }
+        valueWriteFile = Validate.validateValueWriteReadFile(valueWriteFile, fileUserDb);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileUserDb, true))) {
             writer.write(String.valueOf(user.getId()) + ", " + user.getUserName() + ", " + user.getPassword() + ", " + user.getCountry() + ", " + user.getType() + "\n");
@@ -35,25 +33,8 @@ public class UserDAO {
     }
 
     public StringBuffer readFile() throws Exception {
-        if (valueReadFile == 0) {
-            Validate.validateFileRead(fileUserDb);
-            valueReadFile++;
-        }
+        valueReadFile = Validate.validateValueWriteReadFile(valueReadFile, fileUserDb);
 
-        StringBuffer res = new StringBuffer();
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileUserDb))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                res.append(line);
-                res.append("\n");
-            }
-            res.replace(res.length() - 1, res.length(), "");
-        } catch (FileNotFoundException e) {
-            System.err.println("File doesn't exist");
-        } catch (IOException e) {
-            System.out.println("Reading from file " + fileUserDb.toPath() + " failed");
-        }
-
-        return res;
+        return Content.readFile(fileUserDb);
     }
 }

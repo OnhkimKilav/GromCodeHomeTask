@@ -16,8 +16,6 @@ public class HotelService {
     private HotelDAO hotelDAO = new HotelDAO();
 
     public ArrayList<Hotel> findHotelByName(String name) throws Exception {
-        if (name == null)
-            throw new IllegalArgumentException("Name can't be null");
         Validate.validateUserLogIn();
 
         ArrayList<Hotel> hotels = new ArrayList<>();
@@ -65,16 +63,16 @@ public class HotelService {
 
     }
 
-    private ArrayList<Hotel> findHotel(String userContent) {
-        String[] users = userContent.split("\n");
+    private ArrayList<Hotel> findHotel(String hotelContent) {
+        String[] hotels = hotelContent.split("\n");
 
-        ArrayList<Hotel> hotels = new ArrayList<>();
-        for (String user : users) {
-            String[] valuesUser = user.split(", ");
-            hotels.add(new Hotel(Long.parseLong(valuesUser[0]), valuesUser[1], valuesUser[2], valuesUser[3], valuesUser[4]));
+        ArrayList<Hotel> hotels1 = new ArrayList<>();
+        for (String hotel : hotels) {
+            String[] valuesHotel = hotel.split(", ");
+            hotels1.add(new Hotel(Long.parseLong(valuesHotel[0]), valuesHotel[1], valuesHotel[2], valuesHotel[3], valuesHotel[4]));
         }
 
-        return hotels;
+        return hotels1;
     }
 
     private boolean checkNull(Hotel hotel) throws IllegalAccessException {
