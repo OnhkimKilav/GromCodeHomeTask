@@ -1,6 +1,6 @@
 package lesson35.service;
 
-import lesson35.util.Content;
+import lesson35.util.WorkWithContent;
 import lesson35.DAO.OrderDAO;
 import lesson35.model.Order;
 
@@ -19,7 +19,7 @@ public class OrderService {
 
         for (String fileOrder : fileOrders) {
             String[] valuesOrder = fileOrder.split(", ");
-            Order order = new Order(Long.valueOf(valuesOrder[0]), userService.findUserById(Long.valueOf(valuesOrder[1])), roomService.findRoomById(Long.valueOf(valuesOrder[2])), Content.strToDate(valuesOrder[3]), Content.strToDate(valuesOrder[4]), Double.valueOf(valuesOrder[5]));
+            Order order = new Order(Long.valueOf(valuesOrder[0]), userService.findUserById(Long.valueOf(valuesOrder[1])), roomService.findRoomById(Long.valueOf(valuesOrder[2])), WorkWithContent.strToDate(valuesOrder[3]), WorkWithContent.strToDate(valuesOrder[4]), Double.valueOf(valuesOrder[5]));
             if (!(order.getRoom().getId() == roomId) && !(order.getUser().getId() == userId))
                 orderDAO.writeOrder(order);
         }

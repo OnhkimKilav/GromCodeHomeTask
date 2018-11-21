@@ -1,6 +1,6 @@
 package lesson35.DAO;
 
-import lesson35.util.Content;
+import lesson35.util.WorkWithContent;
 import lesson35.util.Validate;
 import lesson35.model.Order;
 
@@ -18,7 +18,7 @@ public class OrderDAO {
         valueWriteFile = Validate.validateValueWriteFile(valueWriteFile, fileOrder);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileOrder, true))) {
-            writer.write(String.valueOf(order.getId()) + ", " + order.getUser() + ", " + order.getRoom() + ", " + Content.dateToStr(order.getDateFrom()) + ", " + Content.dateToStr(order.getDateTo()) + ", " + order.getMoneyPaid() + "\n");
+            writer.write(String.valueOf(order.getId()) + ", " + order.getUser() + ", " + order.getRoom() + ", " + WorkWithContent.dateToStr(order.getDateFrom()) + ", " + WorkWithContent.dateToStr(order.getDateTo()) + ", " + order.getMoneyPaid() + "\n");
         } catch (IOException e) {
             System.err.println("Order " + order.getId() + " can't write to file");
         }
@@ -28,12 +28,12 @@ public class OrderDAO {
     public StringBuffer readOrder() throws Exception {
         valueReadFile = Validate.validateValueReadFile(valueReadFile, fileOrder);
 
-        return Content.readFile(fileOrder);
+        return WorkWithContent.readFile(fileOrder);
     }
 
     public void cleaningFile() throws Exception {
         valueWriteFile = Validate.validateValueWriteFile(valueWriteFile, fileOrder);
 
-        Content.cleaningFile(fileOrder);
+        WorkWithContent.cleaningFile(fileOrder);
     }
 }

@@ -1,6 +1,6 @@
 package lesson35.service;
 
-import lesson35.util.Content;
+import lesson35.util.WorkWithContent;
 import lesson35.DAO.RoomDAO;
 import lesson35.exception.RoomNotFindException;
 import lesson35.controller.HotelController;
@@ -64,7 +64,7 @@ public class RoomService {
         ArrayList<Room> rooms1 = new ArrayList<>();
         for (String room : rooms) {
             String[] valuesRoom = room.split(", ");
-            rooms1.add(new Room(Long.valueOf(valuesRoom[0]), Integer.valueOf(valuesRoom[1]), Double.valueOf(valuesRoom[2]), Boolean.valueOf(valuesRoom[3]), Boolean.valueOf(valuesRoom[4]), Content.strToDate(valuesRoom[5]), hotelService.findHotelById(Long.valueOf(valuesRoom[6]))));
+            rooms1.add(new Room(Long.valueOf(valuesRoom[0]), Integer.valueOf(valuesRoom[1]), Double.valueOf(valuesRoom[2]), Boolean.valueOf(valuesRoom[3]), Boolean.valueOf(valuesRoom[4]), WorkWithContent.strToDate(valuesRoom[5]), hotelService.findHotelById(Long.valueOf(valuesRoom[6]))));
         }
 
         return rooms1;

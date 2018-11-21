@@ -1,9 +1,8 @@
 package lesson35.DAO;
 
-import lesson35.util.Content;
+import lesson35.util.WorkWithContent;
 import lesson35.util.Validate;
 import lesson35.model.Room;
-
 import java.io.*;
 import java.util.Date;
 
@@ -19,7 +18,7 @@ public class RoomDAO {
         valueWriteFile = Validate.validateValueWriteFile(valueWriteFile, fileRoomDb);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileRoomDb, true))) {
-            writer.write(String.valueOf(room.getId()) + ", " + room.getNumberOfGuests() + ", " + room.getPrice() + ", " + room.getBreakfastIncluded() + ", " + room.getPetsAllowed() + ", " + Content.dateToStr(dateTo) + ", " + room.getHotel() + "\n");
+            writer.write(String.valueOf(room.getId()) + ", " + room.getNumberOfGuests() + ", " + room.getPrice() + ", " + room.getBreakfastIncluded() + ", " + room.getPetsAllowed() + ", " + WorkWithContent.dateToStr(dateTo) + ", " + room.getHotel() + "\n");
         } catch (IOException e) {
             System.err.println("Room " + room.getId() + " can't write to file");
         }
@@ -28,6 +27,6 @@ public class RoomDAO {
     public StringBuffer readFile() throws Exception {
         valueReadFile = Validate.validateValueReadFile(valueReadFile, fileRoomDb);
 
-        return Content.readFile(fileRoomDb);
+        return WorkWithContent.readFile(fileRoomDb);
     }
 }

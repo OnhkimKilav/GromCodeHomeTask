@@ -5,7 +5,6 @@ import lesson35.exception.UserLogInException;
 import lesson35.exception.UserNotRegisterException;
 import lesson35.model.User;
 import lesson35.model.UserType;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 

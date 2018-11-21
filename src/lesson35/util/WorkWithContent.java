@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Created by Valik on 20.11.2018.
  */
-public class Content {
+public class WorkWithContent {
     public static StringBuffer readFile(File path){
         StringBuffer res = new StringBuffer();
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {

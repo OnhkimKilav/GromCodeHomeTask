@@ -1,6 +1,6 @@
 package lesson35.DAO;
 
-import lesson35.util.Content;
+import lesson35.util.WorkWithContent;
 import lesson35.util.Validate;
 
 import java.io.*;
@@ -16,19 +16,19 @@ public class HotelDAO {
     public StringBuffer findHotelByName() throws Exception {
         valueReadFile = Validate.validateValueReadFile(valueReadFile, fileHotelDb);
 
-        return Content.readFile(fileHotelDb);
+        return WorkWithContent.readFile(fileHotelDb);
     }
 
     public StringBuffer findHotelByCity() throws Exception {
         valueReadFile = Validate.validateValueReadFile(valueReadFile, fileHotelDb);
 
-        return Content.readFile(fileHotelDb);
+        return WorkWithContent.readFile(fileHotelDb);
     }
 
     public StringBuffer findHotelById() throws Exception {
         valueReadFile = Validate.validateValueReadFile(valueReadFile, fileHotelDb);
 
-        return Content.readFile(fileHotelDb);
+        return WorkWithContent.readFile(fileHotelDb);
     }
 
     public void addHotel(){

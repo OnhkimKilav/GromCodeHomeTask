@@ -1,6 +1,6 @@
 package lesson35.DAO;
 
-import lesson35.util.Content;
+import lesson35.util.WorkWithContent;
 import lesson35.util.Validate;
 import lesson35.model.User;
 
@@ -32,6 +32,6 @@ public class UserDAO {
     public StringBuffer logIn() throws Exception {
         valueReadFile = Validate.validateValueReadFile(valueReadFile, fileUserDb);
 
-        return Content.readFile(fileUserDb);
+        return WorkWithContent.readFile(fileUserDb);
     }
 }
