@@ -15,7 +15,7 @@ public class RoomDAO {
     private byte valueReadFile = 0;
 
     public void bookRoom(Room room, Date dateTo) throws Exception {
-        valueWriteFile = Validate.validateValueWriteReadFile(valueWriteFile, fileRoomDb);
+        valueWriteFile = Validate.validateValueWriteFile(valueWriteFile, fileRoomDb);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileRoomDb, true))) {
             writer.write(String.valueOf(room.getId()) + ", " + room.getNumberOfGuests() + ", " + room.getPrice() + ", " + room.getBreakfastIncluded() + ", " + room.getPetsAllowed() + ", " + Content.dateToStr(dateTo) + ", " + room.getHotel() + "\n");
@@ -25,7 +25,7 @@ public class RoomDAO {
     }
 
     public StringBuffer readFile() throws Exception {
-        valueReadFile = Validate.validateValueWriteReadFile(valueReadFile, fileRoomDb);
+        valueReadFile = Validate.validateValueReadFile(valueReadFile, fileRoomDb);
 
         return Content.readFile(fileRoomDb);
     }

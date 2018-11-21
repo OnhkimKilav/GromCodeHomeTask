@@ -14,7 +14,7 @@ public class OrderDAO {
     private byte valueReadFile = 0;
 
     public void writeOrder(Order order) throws Exception {
-        valueWriteFile = Validate.validateValueWriteReadFile(valueWriteFile, fileOrder);
+        valueWriteFile = Validate.validateValueWriteFile(valueWriteFile, fileOrder);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileOrder, true))) {
             writer.write(String.valueOf(order.getId()) + ", " + order.getUser() + ", " + order.getRoom() + ", " + Content.dateToStr(order.getDateFrom()) + ", " + Content.dateToStr(order.getDateTo()) + ", " + order.getMoneyPaid() + "\n");
@@ -25,13 +25,13 @@ public class OrderDAO {
     }
 
     public StringBuffer readOrder() throws Exception {
-        valueReadFile = Validate.validateValueWriteReadFile(valueReadFile, fileOrder);
+        valueReadFile = Validate.validateValueReadFile(valueReadFile, fileOrder);
 
         return Content.readFile(fileOrder);
     }
 
     public void cleaningFile() throws Exception {
-        valueWriteFile = Validate.validateValueWriteReadFile(valueWriteFile, fileOrder);
+        valueWriteFile = Validate.validateValueWriteFile(valueWriteFile, fileOrder);
 
         Content.cleaningFile(fileOrder);
     }

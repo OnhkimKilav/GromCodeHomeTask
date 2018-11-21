@@ -17,7 +17,7 @@ public class UserDAO {
 
     public User registerUser(User user) throws Exception {
         //save user to db(file)
-        valueWriteFile = Validate.validateValueWriteReadFile(valueWriteFile, fileUserDb);
+        valueWriteFile = Validate.validateValueWriteFile(valueWriteFile, fileUserDb);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileUserDb, true))) {
             writer.write(String.valueOf(user.getId()) + ", " + user.getUserName() + ", " + user.getPassword() + ", " + user.getCountry() + ", " + user.getType() + "\n");
@@ -29,11 +29,7 @@ public class UserDAO {
     }
 
     public StringBuffer logIn() throws Exception {
-        return readFile();
-    }
-
-    public StringBuffer readFile() throws Exception {
-        valueReadFile = Validate.validateValueWriteReadFile(valueReadFile, fileUserDb);
+        valueReadFile = Validate.validateValueReadFile(valueReadFile, fileUserDb);
 
         return Content.readFile(fileUserDb);
     }

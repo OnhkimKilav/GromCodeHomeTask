@@ -14,19 +14,19 @@ public class HotelDAO {
     private static File fileHotelDb = new File("D:\\Programs\\YandexDisk\\Программач Java\\какие то файлы\\HotelDb.txt");
 
     public StringBuffer findHotelByName() throws Exception {
-        valueReadFile = Validate.validateValueWriteReadFile(valueReadFile, fileHotelDb);
+        valueReadFile = Validate.validateValueReadFile(valueReadFile, fileHotelDb);
 
         return Content.readFile(fileHotelDb);
     }
 
     public StringBuffer findHotelByCity() throws Exception {
-        valueReadFile = Validate.validateValueWriteReadFile(valueReadFile, fileHotelDb);
+        valueReadFile = Validate.validateValueReadFile(valueReadFile, fileHotelDb);
 
         return Content.readFile(fileHotelDb);
     }
 
     public StringBuffer findHotelById() throws Exception {
-        valueReadFile = Validate.validateValueWriteReadFile(valueReadFile, fileHotelDb);
+        valueReadFile = Validate.validateValueReadFile(valueReadFile, fileHotelDb);
 
         return Content.readFile(fileHotelDb);
     }

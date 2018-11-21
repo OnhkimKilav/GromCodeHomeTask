@@ -23,7 +23,7 @@ public class UserService {
     }
 
     public User findUserById(Long id) throws Exception {
-        String userContent = userDAO.readFile().toString();
+        String userContent = userDAO.logIn().toString();
         for(User user : findUser(userContent)){
             if(user.getId() == id)
                 return user;
@@ -78,7 +78,7 @@ public class UserService {
     }
 
     private void checkUserName(String userName) throws Exception {
-        String userContent = userDAO.readFile().toString();
+        String userContent = userDAO.logIn().toString();
         String[] fileUsers = userContent.split("\n");
 
         for (String fileUser : fileUsers) {
