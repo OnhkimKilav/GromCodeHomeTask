@@ -15,17 +15,10 @@ import java.util.Date;
  * Created by Valik on 05.11.2018.
  */
 public class RoomService {
-    private RoomDAO roomDAO = new RoomDAO();
-    private UserService userService = new UserService();
-    private HotelController hotelController = new HotelController();
-    private OrderDAO orderDAO = new OrderDAO();
-    private OrderService orderService = new OrderService();
-    private HotelService hotelService = new HotelService();
-
     public void bookRoom(long roomId, long userId, long hotelId) throws Exception {
-        //проверить комнату на бронь
-        //забронировать комнату
-        //записать новые данные
+        RoomDAO roomDAO = new RoomDAO();
+        UserService userService = new UserService();
+        OrderDAO orderDAO = new OrderDAO();
 
         for (Room room : findRoom(roomDAO.readFile().toString())) {
             if(room.getId() == roomId && room.getHotel().getId() == hotelId && (new Date().getTime() - Long.parseLong(String.valueOf(room.getDateAvailableFrom())) >= 0)) {
@@ -40,6 +33,9 @@ public class RoomService {
     }
 
     public void cancelReservation(long roomId, long userId) throws Exception {
+        RoomDAO roomDAO = new RoomDAO();
+        OrderService orderService = new OrderService();
+
         for (Room room : findRoom(roomDAO.readFile().toString())) {
             if(room.getId() == roomId) {
                 orderService.cancelReservation(roomId, userId);
@@ -51,6 +47,8 @@ public class RoomService {
     }
 
     public Room findRoomById(Long id) throws Exception {
+        RoomDAO roomDAO = new RoomDAO();
+
         for(Room room : findRoom(roomDAO.readFile().toString())){
             if(room.getId() == id)
                 return room;
@@ -59,6 +57,8 @@ public class RoomService {
     }
 
     private ArrayList<Room> findRoom(String roomContent) throws Exception {
+        HotelService hotelService = new HotelService();
+
         String[] rooms = roomContent.split("\n");
 
         ArrayList<Room> rooms1 = new ArrayList<>();

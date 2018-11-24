@@ -11,9 +11,9 @@ import java.util.ArrayList;
  * Created by Valik on 05.11.2018.
  */
 public class HotelService {
-    private HotelDAO hotelDAO = new HotelDAO();
 
     public ArrayList<Hotel> findHotelByName(String name) throws Exception {
+        HotelDAO hotelDAO = new HotelDAO();
         Validate.validateUserLogIn();
 
         ArrayList<Hotel> hotels = new ArrayList<>();
@@ -26,6 +26,7 @@ public class HotelService {
     }
 
     public ArrayList<Hotel> findHotelByCity(String city) throws Exception {
+        HotelDAO hotelDAO = new HotelDAO();
         Validate.validateUserLogIn();
 
         ArrayList<Hotel> hotels = new ArrayList<>();
@@ -38,6 +39,7 @@ public class HotelService {
     }
 
     public Hotel findHotelById(Long id) throws Exception {
+        HotelDAO hotelDAO = new HotelDAO();
 
         String hotelContent = hotelDAO.findHotelById().toString();
         for(Hotel hotel : findHotel(hotelContent)){

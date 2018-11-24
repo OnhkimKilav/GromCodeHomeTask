@@ -7,7 +7,7 @@ import lesson35.service.OrderService;
  */
 public class DemoOrder {
     public static void main(String[] args) throws Exception {
-        OrderService orderService = new OrderService();
-        orderService.cancelReservation(3673L, 244L);
+        /*OrderService orderService = new OrderService();
+        orderService.cancelReservation(3673L, 244L);*/
     }
 }

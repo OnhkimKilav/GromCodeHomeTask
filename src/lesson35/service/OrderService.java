@@ -8,11 +8,11 @@ import lesson35.model.Order;
  * Created by Valik on 05.11.2018.
  */
 public class OrderService {
-    private OrderDAO orderDAO = new OrderDAO();
-    private UserService userService = new UserService();
-    private RoomService roomService = new RoomService();
-
     public void cancelReservation(Long roomId, Long userId) throws Exception {
+        OrderDAO orderDAO = new OrderDAO();
+        UserService userService = new UserService();
+        RoomService roomService = new RoomService();
+
         String orderContent = orderDAO.readOrder().toString();
         String[] fileOrders = orderContent.split("\n");
         orderDAO.cleaningFile();

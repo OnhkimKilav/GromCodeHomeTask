@@ -12,12 +12,13 @@ import java.util.ArrayList;
  * Created by Valik on 05.11.2018.
  */
 public class UserService {
-    private UserDAO userDAO = new UserDAO();
     public static User logInUser = null;
 
     public User registerUser(User user) throws Exception {
         //check business logic
         //нет пустых значений
+        UserDAO userDAO = new UserDAO();
+
         checkNull(user);
         checkUserName(user.getUserName());
 
@@ -25,6 +26,8 @@ public class UserService {
     }
 
     public User findUserById(Long id) throws Exception {
+        UserDAO userDAO = new UserDAO();
+
         String userContent = userDAO.logIn().toString();
         for(User user : findUser(userContent)){
             if(user.getId() == id)
@@ -46,6 +49,8 @@ public class UserService {
     }
 
     public void logIn(String userName, String password) throws Exception {
+        UserDAO userDAO = new UserDAO();
+
         //прочитать всех юзеров с файла
         //проверить есть ли на файле юзер с таким именем и паролем
         if (userName == null)
@@ -80,6 +85,8 @@ public class UserService {
     }
 
     private void checkUserName(String userName) throws Exception {
+        UserDAO userDAO = new UserDAO();
+
         String userContent = userDAO.logIn().toString();
         String[] fileUsers = userContent.split("\n");
 
