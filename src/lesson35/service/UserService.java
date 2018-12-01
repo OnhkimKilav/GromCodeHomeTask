@@ -1,10 +1,12 @@
 package lesson35.service;
 
 import lesson35.DAO.UserDAO;
+import lesson35.exception.BadRequestException;
 import lesson35.exception.UserLogInException;
 import lesson35.exception.UserNotRegisterException;
 import lesson35.model.User;
 import lesson35.model.UserType;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
@@ -13,44 +15,26 @@ import java.util.ArrayList;
  */
 public class UserService {
     public static User logInUser = null;
+    private UserDAO userDAO = new UserDAO();
 
     public User registerUser(User user) throws Exception {
         //check business logic
         //нет пустых значений
-        UserDAO userDAO = new UserDAO();
 
-        checkNull(user);
         checkUserName(user.getUserName());
 
         return userDAO.registerUser(user);
     }
 
     public User findUserById(Long id) throws Exception {
-        UserDAO userDAO = new UserDAO();
-
-        String userContent = userDAO.logIn().toString();
-        for(User user : findUser(userContent)){
-            if(user.getId() == id)
+        for (User user : userDAO.listUser()) {
+            if (user.getId() == id)
                 return user;
         }
         throw new NoSuchFieldError("User " + id + " don't found");
     }
 
-    private ArrayList<User> findUser(String userContent) {
-        String[] users = userContent.split("\n");
-
-        ArrayList<User> users1 = new ArrayList<>();
-        for (String user : users) {
-            String[] valuesUser = user.split(", ");
-            users1.add(new User(Long.parseLong(valuesUser[0]), valuesUser[1], valuesUser[2], valuesUser[3], UserType.valueOf(valuesUser[4])));
-        }
-
-        return users1;
-    }
-
-    public void logIn(String userName, String password) throws Exception {
-        UserDAO userDAO = new UserDAO();
-
+    /*public void logIn(String userName, String password) throws Exception {
         //прочитать всех юзеров с файла
         //проверить есть ли на файле юзер с таким именем и паролем
         if (userName == null)
@@ -60,15 +44,8 @@ public class UserService {
         if (logInUser != null)
             throw new UserLogInException("User " + logInUser.getUserName() + " is currently logged in");
 
-        String userContent = userDAO.logIn().toString();
-        String[] fileUsers = userContent.split("\n");
-
-        StringBuffer res = new StringBuffer();
         int index = 0;
-
-        for (String fileUser : fileUsers) {
-            String[] valuesUser = fileUser.split(", ");
-            User user = new User(Long.parseLong(valuesUser[0]), valuesUser[1], valuesUser[2], valuesUser[3], UserType.valueOf(valuesUser[4]));
+        for(User user : userDAO.listUser())
             if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
                 logInUser = user;
                 break;
@@ -77,30 +54,16 @@ public class UserService {
 
             index++;
         }
-    }
+    }*/
 
-    public void logOut() {
+    /*public void logOut() {
         if (logInUser != null)
             logInUser = null;
-    }
+    }*/
 
     private void checkUserName(String userName) throws Exception {
-        UserDAO userDAO = new UserDAO();
-
-        String userContent = userDAO.logIn().toString();
-        String[] fileUsers = userContent.split("\n");
-
-        for (String fileUser : fileUsers) {
-            String[] valuesUser = fileUser.split(", ");
-            User user = new User(Long.parseLong(valuesUser[0]), valuesUser[1], valuesUser[2], valuesUser[3], UserType.valueOf(valuesUser[4]));
-            if(user.getUserName().equals(userName))
+        for (User user : userDAO.listUser())
+            if (user.getUserName().equals(userName))
                 throw new UserNotRegisterException(userName + " already in use. Use a different name");
-        }
-    }
-
-    private void checkNull(User user) throws IllegalAccessException {
-        for (Field f : getClass().getDeclaredFields())
-            if (f.get(this) != null)
-                throw new IllegalArgumentException("User " + user.getId() + "can't have null");
     }
 }

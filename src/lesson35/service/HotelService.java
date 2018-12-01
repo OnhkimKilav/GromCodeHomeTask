@@ -11,14 +11,13 @@ import java.util.ArrayList;
  * Created by Valik on 05.11.2018.
  */
 public class HotelService {
+    private HotelDAO hotelDAO = new HotelDAO();
 
     public ArrayList<Hotel> findHotelByName(String name) throws Exception {
-        HotelDAO hotelDAO = new HotelDAO();
         Validate.validateUserLogIn();
 
         ArrayList<Hotel> hotels = new ArrayList<>();
-        String hotelContent = hotelDAO.findHotelByName().toString();
-        for (Hotel hotel : findHotel(hotelContent)) {
+        for (Hotel hotel : hotelDAO.listHotel()) {
             if (hotel.getName().equals(name))
                 hotels.add(hotel);
         }
@@ -26,12 +25,11 @@ public class HotelService {
     }
 
     public ArrayList<Hotel> findHotelByCity(String city) throws Exception {
-        HotelDAO hotelDAO = new HotelDAO();
         Validate.validateUserLogIn();
 
         ArrayList<Hotel> hotels = new ArrayList<>();
-        String hotelContent = hotelDAO.findHotelByCity().toString();
-        for (Hotel hotel : findHotel(hotelContent)) {
+
+        for (Hotel hotel : hotelDAO.listHotel()) {
             if (hotel.getCity().equals(city))
                 hotels.add(hotel);
         }
@@ -39,10 +37,8 @@ public class HotelService {
     }
 
     public Hotel findHotelById(Long id) throws Exception {
-        HotelDAO hotelDAO = new HotelDAO();
 
-        String hotelContent = hotelDAO.findHotelById().toString();
-        for(Hotel hotel : findHotel(hotelContent)){
+        for(Hotel hotel : hotelDAO.listHotel()){
             if(hotel.getId() == id)
                 return hotel;
         }
@@ -57,28 +53,5 @@ public class HotelService {
         //записать отель
         Validate.validateUserLogIn();
         Validate.validateUserType(UserService.logInUser);
-        checkNull(hotel);
-
-
-
-    }
-
-    private ArrayList<Hotel> findHotel(String hotelContent) {
-        String[] hotels = hotelContent.split("\n");
-
-        ArrayList<Hotel> hotels1 = new ArrayList<>();
-        for (String hotel : hotels) {
-            String[] valuesHotel = hotel.split(", ");
-            hotels1.add(new Hotel(Long.parseLong(valuesHotel[0]), valuesHotel[1], valuesHotel[2], valuesHotel[3], valuesHotel[4]));
-        }
-
-        return hotels1;
-    }
-
-    private boolean checkNull(Hotel hotel) throws IllegalAccessException {
-        for (Field f : getClass().getDeclaredFields())
-            if (f.get(this) != null)
-                throw new IllegalArgumentException("Hotel " + hotel.getId() + "can't have null");
-        return true;
     }
 }

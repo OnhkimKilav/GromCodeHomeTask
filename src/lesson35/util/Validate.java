@@ -34,23 +34,7 @@ public class Validate {
     }
 
     public static void validateUserType(User user) throws UserNotAdminException {
-        if(!user.getType().equals(UserType.ADMIN))
+        if (!user.getType().equals(UserType.ADMIN))
             throw new UserNotAdminException("User " + user.getId() + " doesn't admin. You can't use this feature");
-    }
-
-    public static Byte validateValueWriteFile(Byte value, File path) throws Exception {
-        if (value == 0) {
-            validateFileWrite(path);
-            value++;
-        }
-        return value;
-    }
-
-    public static Byte validateValueReadFile(Byte value, File path) throws Exception {
-        if (value == 0) {
-            validateFileRead(path);
-            value++;
-        }
-        return value;
     }
 }

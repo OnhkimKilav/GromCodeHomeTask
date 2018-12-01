@@ -13,6 +13,7 @@ public class User {
     private UserType type;
 
     private Random random = new Random();
+
     public User(String userName, String password, String country, UserType type) {
         this.id = random.nextLong();
         this.userName = userName;
@@ -51,12 +52,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", country='" + country + '\'' +
-                ", type=" + type +
-                '}';
+        return id + ", " + userName + ", " + password + ", " + country + ", " + type + "\n";
     }
 }
