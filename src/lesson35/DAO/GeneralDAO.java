@@ -1,4 +1,4 @@
-package lesson35.util;
+package lesson35.DAO;
 
 import java.io.*;
 import java.text.ParseException;
@@ -9,7 +9,10 @@ import java.util.Date;
 /**
  * Created by Valik on 20.11.2018.
  */
-public class WorkWithContent {
+public abstract class GeneralDAO {
+
+    public abstract Object transformationStringToUser(String[] values) throws Exception;
+
     public static StringBuffer readFile(File path){
         StringBuffer res = new StringBuffer();
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
@@ -27,6 +30,7 @@ public class WorkWithContent {
 
         return res;
     }
+
 
     public static void cleaningFile(File path){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {

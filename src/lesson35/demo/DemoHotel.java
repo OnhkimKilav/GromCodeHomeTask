@@ -1,5 +1,6 @@
 package lesson35.demo;
 
+import lesson35.DAO.HotelDAO;
 import lesson35.controller.HotelController;
 
 /**
@@ -13,5 +14,7 @@ public class DemoHotel {
         System.out.println(hotelController.findHotelByName("Ug"));
         System.out.println("find hotel by city");
         System.out.println(hotelController.findHotelByCity("Kiev"));*/
+        HotelDAO hotelDAO = new HotelDAO();
+        HotelDAO.method();
     }
 }
