@@ -13,10 +13,11 @@ import java.util.Date;
  */
 public class RoomService {
     private RoomDAO roomDAO = new RoomDAO();
-    public void bookRoom(long roomId, long userId, long hotelId) throws Exception {
-        UserService userService = new UserService();
-        OrderDAO orderDAO = new OrderDAO();
+    UserService userService = new UserService();
+    OrderDAO orderDAO = new OrderDAO();
+    OrderService orderService = new OrderService();
 
+    public void bookRoom(long roomId, long userId, long hotelId) throws Exception {
         for (Room room : roomDAO.listRoom()) {
             if(room.getId() == roomId && room.getHotel().getId() == hotelId && (new Date().getTime() - Long.parseLong(String.valueOf(room.getDateAvailableFrom())) >= 0)) {
                 Order order = new Order(userService.findUserById(userId), room, new Date(), dateTo(), room.getPrice());
@@ -30,15 +31,12 @@ public class RoomService {
     }
 
     public void cancelReservation(long roomId, long userId) throws Exception {
-        OrderService orderService = new OrderService();
-
         for (Room room : roomDAO.listRoom()) {
             if(room.getId() == roomId) {
                 orderService.cancelReservation(roomId, userId);
                 roomDAO.bookRoom(room, new Date());
-                continue;
+                break;
             }
-            roomDAO.bookRoom(room, room.getDateAvailableFrom());
         }
     }
 
@@ -47,7 +45,7 @@ public class RoomService {
             if(room.getId() == id)
                 return room;
         }
-        throw new NoSuchFieldError("Room " + id + " don't found");
+        throw new RoomNotFindException("Room " + id + " don't found");
     }
 
     private Date dateTo(){
