@@ -8,6 +8,9 @@ import lesson35.service.RoomService;
 public class RoomController {
     private RoomService roomService = new RoomService();
 
+    public RoomController() throws Exception {
+    }
+
     public void bookRoom(long roomId, long userId, long hotelId) throws Exception {
         roomService.bookRoom(roomId, userId, hotelId);
     }

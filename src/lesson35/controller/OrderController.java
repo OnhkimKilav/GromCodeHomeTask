@@ -10,4 +10,6 @@ public class OrderController {
     private OrderService orderService = new OrderService();
 
 
+    public OrderController() throws Exception {
+    }
 }

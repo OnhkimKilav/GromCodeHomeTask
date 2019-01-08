@@ -11,6 +11,9 @@ import java.util.ArrayList;
 public class HotelController {
     private HotelService hotelService = new HotelService();
 
+    public HotelController() throws Exception {
+    }
+
     public ArrayList<Hotel> findHotelByName(String name) throws Exception {
         return hotelService.findHotelByName(name);
     }
