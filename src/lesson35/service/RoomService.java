@@ -13,9 +13,12 @@ import java.util.Date;
  */
 public class RoomService {
     private RoomDAO roomDAO = new RoomDAO();
-    UserService userService = new UserService();
-    OrderDAO orderDAO = new OrderDAO();
-    OrderService orderService = new OrderService();
+    private UserService userService = new UserService();
+    private OrderDAO orderDAO = new OrderDAO();
+    private OrderService orderService = new OrderService();
+
+    public RoomService() throws Exception {
+    }
 
     public void bookRoom(long roomId, long userId, long hotelId) throws Exception {
         for (Room room : roomDAO.listRoom()) {

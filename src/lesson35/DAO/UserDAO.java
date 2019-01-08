@@ -20,13 +20,9 @@ public class UserDAO extends GeneralDAO {
         return new User(Long.parseLong(valuesUser[0]), valuesUser[1], valuesUser[2], valuesUser[3], UserType.valueOf(valuesUser[4]));
     }
 
-    static {
-        try {
-            Validate.validateFileWrite(fileUserDb);
-            Validate.validateFileRead(fileUserDb);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public UserDAO() throws Exception {
+        Validate.validateFileWrite(fileUserDb);
+        Validate.validateFileRead(fileUserDb);
     }
 
     public User registerUser(User user) throws Exception {

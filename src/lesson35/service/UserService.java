@@ -17,6 +17,9 @@ public class UserService {
     public static User logInUser = null;
     private UserDAO userDAO = new UserDAO();
 
+    public UserService() throws Exception {
+    }
+
     public User registerUser(User user) throws Exception {
         //check business logic
         //нет пустых значений

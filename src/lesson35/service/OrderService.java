@@ -9,6 +9,10 @@ import lesson35.model.Order;
  */
 public class OrderService {
     private OrderDAO orderDAO = new OrderDAO();
+
+    public OrderService() throws Exception {
+    }
+
     public void cancelReservation(Long roomId, Long userId) throws Exception {
         UserService userService = new UserService();
         RoomService roomService = new RoomService();

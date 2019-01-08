@@ -21,13 +21,9 @@ public class RoomDAO extends GeneralDAO{
         return new Room(Long.valueOf(valuesRoom[0]), Integer.valueOf(valuesRoom[1]), Double.valueOf(valuesRoom[2]), Boolean.valueOf(valuesRoom[3]), Boolean.valueOf(valuesRoom[4]), GeneralDAO.strToDate(valuesRoom[5]), hotelService.findHotelById(Long.valueOf(valuesRoom[6])));
     }
 
-    static {
-        try {
-            Validate.validateFileRead(fileRoomDb);
-            Validate.validateFileWrite(fileRoomDb);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public RoomDAO() throws Exception{
+        Validate.validateFileRead(fileRoomDb);
+        Validate.validateFileWrite(fileRoomDb);
     }
 
     public void bookRoom(Room room, Date dateTo) throws Exception {

@@ -13,13 +13,9 @@ import java.util.ArrayList;
 public class HotelDAO extends GeneralDAO {
     private static File fileHotelDb = new File("D:\\Programs\\YandexDisk\\Программач Java\\какие то файлы\\HotelDb.txt");
 
-    static {
-        try {
-            Validate.validateFileRead(fileHotelDb);
-            Validate.validateFileWrite(fileHotelDb);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public HotelDAO() throws Exception{
+        Validate.validateFileRead(fileHotelDb);
+        Validate.validateFileWrite(fileHotelDb);
     }
 
     @Override

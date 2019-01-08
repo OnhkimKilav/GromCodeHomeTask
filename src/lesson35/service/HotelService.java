@@ -13,7 +13,12 @@ import java.util.ArrayList;
 public class HotelService {
     private HotelDAO hotelDAO = new HotelDAO();
 
+    public HotelService() throws Exception {
+    }
+
+
     public ArrayList<Hotel> findHotelByName(String name) throws Exception {
+        HotelDAO hotelDAO = new HotelDAO();
         Validate.validateUserLogIn();
 
         ArrayList<Hotel> hotels = new ArrayList<>();
@@ -25,6 +30,7 @@ public class HotelService {
     }
 
     public ArrayList<Hotel> findHotelByCity(String city) throws Exception {
+        HotelDAO hotelDAO = new HotelDAO();
         Validate.validateUserLogIn();
 
         ArrayList<Hotel> hotels = new ArrayList<>();
@@ -37,6 +43,7 @@ public class HotelService {
     }
 
     public Hotel findHotelById(Long id) throws Exception {
+        HotelDAO hotelDAO = new HotelDAO();
 
         for(Hotel hotel : hotelDAO.listHotel()){
             if(hotel.getId() == id)

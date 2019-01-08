@@ -16,13 +16,9 @@ public class OrderDAO extends GeneralDAO{
         return null;
     }
 
-    static {
-        try {
-            Validate.validateFileRead(fileOrder);
-            Validate.validateFileWrite(fileOrder);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public OrderDAO() throws Exception {
+        Validate.validateFileRead(fileOrder);
+        Validate.validateFileWrite(fileOrder);
     }
 
     public void writeOrder(Order order) throws Exception {
